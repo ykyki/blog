@@ -1,2 +1,3 @@
 <h1>{{ site.Title }}</h1>
+{{ seq 0 9 | shuffle }}
 {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
