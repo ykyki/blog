@@ -1,14 +1,15 @@
-name: GitHub Pages
+name: Build hugos
 
 on:
   push:
-  pull_request:
-  workflow_dispatch:
 
 jobs:
   build:
     name: Build hugo
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./hugos
     steps:
       - uses: actions/checkout@v4
         with:
@@ -21,7 +22,7 @@ jobs:
         #   extended: true
       - name: Build
         run: hugo --minify
-      # - name: Deploy
+      # - name: Deploy GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v3
       #   if: github.ref == 'refs/heads/main'
       #   with:
