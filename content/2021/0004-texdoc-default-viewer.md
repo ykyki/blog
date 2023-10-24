@@ -22,7 +22,7 @@ $\TeX$や$\LaTeX$を使って文書作成をしていたときに、PGF や beam
 
 texdoc のバージョンは `3.2.2` とする.
 
-```
+```txt
 % texdoc -V
 Texdoc 3.2.2 (2020-09-16)
 
@@ -58,7 +58,7 @@ Recommended file(s) for personal settings:
 
 その前に、既にアクティブになっているファイルの内容を確認してみたところ、次のような記述があった:
 
-```
+```txt
 ...
 
  22

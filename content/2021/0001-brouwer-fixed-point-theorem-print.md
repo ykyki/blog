@@ -18,4 +18,4 @@ keywords:
 
 ## PDF
 
-{{< pdf title="Brouwer の不動点定理とその周辺" path="1_BXMq5JMz0UImsuFTzwaLoqSeifnqPCx" >}}
+{< pdf title="Brouwer の不動点定理とその周辺">}
