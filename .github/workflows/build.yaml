@@ -45,7 +45,11 @@ jobs:
           version: "8"
       - name: Install dependencies
         run: pnpm install --prefer-frozen-lockfile
+      - name: Check
+        run: pnpm check
+      - name: Lint
+        run: pnpm lint
       - name: Build
         run: pnpm build
-      # - name: Test
-      #   run: pnpm test
+      - name: Test
+        run: pnpm test
