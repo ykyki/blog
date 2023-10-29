@@ -1,15 +1,22 @@
 import type { PageServerLoad } from './$types';
-import { promises as fs } from 'fs';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 
 export const prerender = true;
 
 export const load = (async () => {
+    const contentPath = path.join(process.cwd(), '..', 'content');
+    console.log(contentPath);
     const fcont1 = await fs.readFile(
-        '../content/2021/0004-texdoc-default-viewer.md',
+        path.join(contentPath, '2021', '0004-texdoc-default-viewer.md'),
         'utf-8',
     );
     const fcont2 = await fs.readFile(
-        '../content/2021/0001-brouwer-fixed-point-theorem-print.md',
+        path.join(
+            contentPath,
+            '2021',
+            '0001-brouwer-fixed-point-theorem-print.md',
+        ),
         'utf-8',
     );
 
