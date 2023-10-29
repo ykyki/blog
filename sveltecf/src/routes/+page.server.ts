@@ -8,13 +8,13 @@ export const load = (async () => {
     const contentPath = path.join(process.cwd(), '..', 'content');
 
     console.log('--- current dir:', process.cwd());
-    fs.readdir(process.cwd()).then((files) => {
-        console.log(files);
+    await fs.readdir(process.cwd()).then((files) => {
+        console.log('--- current dir /', files);
     });
 
     console.log('--- content dir', contentPath);
-    fs.readdir(contentPath).then((files) => {
-        console.log(files);
+    await fs.readdir(contentPath).then((files) => {
+        console.log('--content dir /', files);
     });
 
     const fcont1 = await fs.readFile(
