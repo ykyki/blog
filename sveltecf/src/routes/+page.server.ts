@@ -7,12 +7,12 @@ export const prerender = true;
 export const load = (async () => {
     const contentPath = path.join(process.cwd(), '..', 'content');
 
-    console.log(process.cwd());
+    console.log('--- current dir:', process.cwd());
     fs.readdir(process.cwd()).then((files) => {
         console.log(files);
     });
 
-    console.log(contentPath);
+    console.log('--- content dir', contentPath);
     fs.readdir(contentPath).then((files) => {
         console.log(files);
     });
