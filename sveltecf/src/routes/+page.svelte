@@ -3,7 +3,7 @@
 
     export let data: PageData;
 
-    const { date, fcont } = data;
+    const { date, articles } = data;
 </script>
 
 <h1>blog.ykyki.net</h1>
@@ -11,8 +11,13 @@
 <div>
     fcontent:
     <ol>
-        {#each fcont as item}
-            <li>{item}</li>
+        {#each articles as article}
+            <li>
+                <div>
+                    <h2>{article.title}</h2>
+                    <p>{article.source}</p>
+                </div>
+            </li>
         {/each}
     </ol>
 </div>
