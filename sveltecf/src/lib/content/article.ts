@@ -22,11 +22,20 @@ export class Article {
 const contentPath = path.join(process.cwd(), '..', 'content');
 const articlePath = path.join(contentPath, '2021');
 
-export const fetchAllArticles = async (): Promise<Article[]> => {
-    const files = await fs.readdir(articlePath);
+const cache = {
+    articles: undefined,
+} as {
+    articles: Article[] | undefined;
+};
 
+export const fetchAllArticles = async (): Promise<Article[]> => {
+    if (cache.articles !== undefined) {
+        return cache.articles;
+    }
+
+    const files = await fs.readdir(articlePath);
     // TODO ひとつでも失敗が発生したときにエラーになってしまう。失敗が発生したとしても継続できるようにする
-    return Promise.all(
+    const articles = await Promise.all(
         files
             .map((filename) => path.join(articlePath, filename))
             .map(
@@ -37,4 +46,7 @@ export const fetchAllArticles = async (): Promise<Article[]> => {
                     ),
             ),
     );
+
+    cache.articles = articles;
+    return cache.articles;
 };
