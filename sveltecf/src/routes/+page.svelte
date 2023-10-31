@@ -8,13 +8,16 @@
 
 <h1>blog.ykyki.net</h1>
 <p>rendered at {date}</p>
+
+<hr />
+
+<h2>Articles</h2>
 <div>
-    fcontent:
     <ol>
         {#each articles as article}
             <li>
                 <div>
-                    <h2>{article.title}</h2>
+                    <h3>{article.title}</h3>
                     <p>{article.source}</p>
                 </div>
             </li>
