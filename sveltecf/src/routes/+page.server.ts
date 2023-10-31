@@ -7,16 +7,6 @@ export const prerender = true;
 export const load = (async () => {
     const contentPath = path.join(process.cwd(), '..', 'content');
 
-    console.log('--- current dir:', process.cwd());
-    await fs.readdir(process.cwd()).then((files) => {
-        console.log('--- current dir /', files);
-    });
-
-    console.log('--- content dir', contentPath);
-    await fs.readdir(contentPath).then((files) => {
-        console.log('--content dir /', files);
-    });
-
     const fcont1 = await fs.readFile(
         path.join(contentPath, '2021', '0004-texdoc-default-viewer.md'),
         'utf-8',
