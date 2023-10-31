@@ -1,11 +1,11 @@
-name: Build hugos🫂
+name: Build🔨
 
 on:
   push:
 
 jobs:
-  build:
-    name: Build hugo
+  build-hugos:
+    name: Build hugos
     runs-on: ubuntu-latest
     defaults:
       run:
