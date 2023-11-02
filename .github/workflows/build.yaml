@@ -32,9 +32,6 @@ jobs:
   build-sveltecf:
     name: Build sveltecf
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./sveltecf
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v2
@@ -46,12 +43,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --prefer-frozen-lockfile
       - name: Check
-        run: pnpm check
+        run: pnpm sveltecf check
       - name: Lint
-        run: pnpm lint
+        run: pnpm sveltecf check
       - name: Build
-        run: pnpm build
+        run: pnpm run build
       - name: Install playwright
-        run: pnpm exec playwright install --with-deps
+        run: pnpm sveltecf exec playwright install --with-deps
       - name: Test
-        run: pnpm test
+        run: pnpm sveltecf test
