@@ -42,12 +42,12 @@ jobs:
           version: "8"
       - name: Install dependencies
         run: pnpm install --prefer-frozen-lockfile
+      - name: Build
+        run: pnpm run build
       - name: Check
         run: pnpm sveltecf check
       - name: Lint
         run: pnpm sveltecf check
-      - name: Build
-        run: pnpm run build
       - name: Install playwright
         run: pnpm sveltecf exec playwright install --with-deps
       - name: Test
