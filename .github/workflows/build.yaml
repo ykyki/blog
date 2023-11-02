@@ -45,10 +45,10 @@ jobs:
       - name: Build
         run: pnpm run build
       - name: Check
-        run: pnpm sveltecf check
+        run: pnpm sveltecf run check
       - name: Lint
-        run: pnpm sveltecf check
+        run: pnpm sveltecf run lint
       - name: Install playwright
         run: pnpm sveltecf exec playwright install --with-deps
       - name: Test
-        run: pnpm sveltecf test
+        run: pnpm sveltecf run test
