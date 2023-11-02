@@ -1,0 +1,11 @@
+{
+    "useTabs": false,
+    "tabWidth": 4,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "bracketSameLine": true,
+    "arrowParens": "always",
+    "pluginSearchDirs": ["."],
+    "overrides": [{ "files": "*.yaml", "options": { "tabWidth": 2 } }]
+}
