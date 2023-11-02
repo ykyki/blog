@@ -1,6 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "build": "pnpm run -F uniproc compile && pnpm run -F sveltecf build"
+    "build": "pnpm run -F uniproc compile && pnpm run -F sveltecf build",
+    "sveltecf": "pnpm run -F sveltecf",
+    "uniproc": "pnpm run -F uniproc"
   }
 }
