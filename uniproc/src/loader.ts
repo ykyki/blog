@@ -1,28 +1,11 @@
 import path from "node:path";
 import fs from "node:fs/promises";
+import Article from "./Article";
 
-export class Article {
-  private title: string;
-  private source: string;
-
-  constructor(title: string, source: string) {
-    this.title = title;
-    this.source = source;
-  }
-
-  getTitle(): string {
-    return this.title;
-  }
-
-  getSource(): string {
-    return this.source;
-  }
-}
-
-const contentPath = path.join(process.cwd(), "..", "content");
-const articlePath = path.join(contentPath, "2021");
-
-export const readAllArticles = async (): Promise<Article[]> => {
+export const loadAllArticles = async (
+  contentPath: string
+): Promise<Article[]> => {
+  const articlePath = path.join(contentPath, "2021");
   const files = await fs.readdir(articlePath);
   // TODO ひとつでも失敗が発生したときにエラーになってしまう。失敗が発生したとしても継続できるようにする
   const articles = await Promise.all(
@@ -39,8 +22,3 @@ export const readAllArticles = async (): Promise<Article[]> => {
 
   return articles;
 };
-
-console.log(articlePath);
-readAllArticles().then((articles) => {
-  console.log(articles);
-});

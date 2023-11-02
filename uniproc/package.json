@@ -1,11 +1,13 @@
 {
   "name": "uniproc",
   "private": true,
-  "main": "dist/index.js",
+  "main": "dist/lib.js",
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --outfile=build/index.cjs --tsconfig=tsconfig.json --platform=node --target=node20",
-    "start": "pnpm run build && node build/index.cjs",
-    "compile": "pnpm clean:dist && tsc --outDir dist --declaration --target es2022 --moduleResolution node",
+    "main": "pnpm run build && node build/main.cjs",
+    "build": "esbuild src/main.ts --bundle --outfile=build/main.cjs --tsconfig=tsconfig.json --platform=node --target=node20",
+    "compile": "tsc --outDir dist --declaration --target es2022 --moduleResolution node",
+    "clean": "pnpm run clean:build && pnpm run clean:dist",
+    "clean:build": "rm -rf ./build",
     "clean:dist": "rm -rf ./dist"
   },
   "devDependencies": {
@@ -13,5 +15,9 @@
     "esbuild": "0.19.5",
     "typescript": "^5.2.2"
   },
-  "exports": "./dist/index.js"
+  "exports": {
+    ".": {
+      "import": "./dist/lib.js"
+    }
+  }
 }
