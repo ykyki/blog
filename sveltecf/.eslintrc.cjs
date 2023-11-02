@@ -1,6 +1,7 @@
 module.exports = {
-    root: true,
+    root: false,
     extends: [
+        '../.eslintrc.cjs',
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
         'plugin:svelte/recommended',

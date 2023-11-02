@@ -2,7 +2,14 @@
   "private": true,
   "scripts": {
     "build": "pnpm run -F uniproc compile && pnpm run -F sveltecf build",
+    "lint": "eslint --ext .ts,.svelte .",
     "sveltecf": "pnpm -F sveltecf",
     "uniproc": "pnpm -F uniproc"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0"
   }
 }
