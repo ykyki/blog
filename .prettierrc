@@ -6,6 +6,5 @@
     "bracketSpacing": true,
     "bracketSameLine": true,
     "arrowParens": "always",
-    "pluginSearchDirs": ["."],
     "overrides": [{ "files": "*.yaml", "options": { "tabWidth": 2 } }]
 }
