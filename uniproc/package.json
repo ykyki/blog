@@ -1,0 +1,17 @@
+{
+  "name": "uniproc",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --outfile=build/index.cjs --tsconfig=tsconfig.json --platform=node --target=node20",
+    "start": "pnpm run build && node build/index.cjs",
+    "compile": "pnpm clean:dist && tsc --outDir dist --declaration --target es2022 --moduleResolution node",
+    "clean:dist": "rm -rf ./dist"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.10",
+    "esbuild": "0.19.5",
+    "typescript": "^5.2.2"
+  },
+  "exports": "./dist/index.js"
+}

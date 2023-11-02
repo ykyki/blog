@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "allowJs": false,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "baseUrl": "./src"
+  },
+  "include": ["src/**/*"]
+}
