@@ -1,24 +1,24 @@
 {
-  "name": "uniproc",
-  "private": true,
-  "type": "module",
-  "main": "dist/lib.js",
-  "scripts": {
-    "main": "pnpm run build && node build/main.js",
-    "build": "esbuild src/main.ts --bundle --outfile=build/main.js --format=esm --platform=node --target=node20",
-    "compile": "tsc --outDir dist --declaration --target es2022 --moduleResolution node",
-    "clean": "pnpm run --parallel \"/clean:.+/\"",
-    "clean:build": "rm -rf ./build",
-    "clean:dist": "rm -rf ./dist"
-  },
-  "devDependencies": {
-    "@types/node": "^20.8.10",
-    "esbuild": "0.19.5",
-    "typescript": "^5.2.2"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/lib.js"
+    "name": "uniproc",
+    "private": true,
+    "type": "module",
+    "main": "dist/lib.js",
+    "scripts": {
+        "main": "pnpm run build && node build/main.js",
+        "build": "esbuild src/main.ts --bundle --outfile=build/main.js --format=esm --platform=node --target=node20",
+        "compile": "tsc --outDir dist --declaration --target es2022 --moduleResolution node",
+        "clean": "pnpm run --parallel \"/clean:.+/\"",
+        "clean:build": "rm -rf ./build",
+        "clean:dist": "rm -rf ./dist"
+    },
+    "devDependencies": {
+        "@types/node": "^20.8.10",
+        "esbuild": "0.19.5",
+        "typescript": "^5.2.2"
+    },
+    "exports": {
+        ".": {
+            "import": "./dist/lib.js"
+        }
     }
-  }
 }
