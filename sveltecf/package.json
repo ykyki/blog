@@ -10,7 +10,7 @@
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
         "lint": "prettier --plugin-search-dir . --check . && eslint .",
         "format": "prettier --plugin-search-dir . --write .",
-        "test": "pnpm run test:unit && pnpm run test:integration",
+        "test": "pnpm run -parallel \"/test:.+/\"",
         "test:unit": "vitest run",
         "test:integration": "playwright test",
         "pages:dev": "wrangler pages dev --compatibility-date=2023-10-25 --proxy 5173 -- pnpm run dev",
