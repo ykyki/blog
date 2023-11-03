@@ -30,10 +30,10 @@ jobs:
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
       #     publish_dir: ./public
 
-  build-sveltecf:
-    name: Build sveltecf
+  pnpm-install:
+    name: pnpm install
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v2
@@ -44,6 +44,22 @@ jobs:
           version: '8'
       - name: Install dependencies
         run: pnpm install --prefer-frozen-lockfile
+
+  build-sveltecf:
+    name: Build sveltecf
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    needs: pnpm-install
+    steps:
+      # - uses: actions/checkout@v4
+      # - uses: actions/setup-node@v2
+      #   with:
+      #     node-version: '20'
+      # - uses: pnpm/action-setup@v2
+      #   with:
+      #     version: '8'
+      # - name: Install dependencies
+      #   run: pnpm install --prefer-frozen-lockfile
       - name: Build
         run: pnpm run build
       - name: Lint
@@ -54,3 +70,15 @@ jobs:
         run: pnpm sveltecf exec playwright install --with-deps
       - name: Test
         run: pnpm sveltecf run test
+
+  build-uniproc:
+    name: Build uniproc
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    needs: pnpm-install
+    defaults:
+      run:
+        working-directory: ./uniproc
+    steps:
+      - name: Check
+        run: pnpm run build
