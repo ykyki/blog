@@ -3,6 +3,5 @@ import { loadAllArticles } from 'loader';
 
 const contentPath = path.join(process.cwd(), '..', 'content');
 
-loadAllArticles(contentPath).then((articles) => {
-    console.log(articles);
-});
+const articles = await loadAllArticles(contentPath);
+console.log(articles[0]);
