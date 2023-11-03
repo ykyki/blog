@@ -47,7 +47,9 @@ jobs:
       - name: Cache pnpm
         uses: actions/cache@v3
         with:
-          path: ~/node_modules
+          path: |
+            ./node_modules
+            ./sveltecf/node_modules
           key: ${{ runner.os }}-pnpm-${{ hashFiles('./pnpm-lock.yaml') }}
 
   build-sveltecf:
@@ -68,7 +70,9 @@ jobs:
       - name: Restore Cache
         uses: actions/cache@v3
         with:
-          path: ~/node_modules
+          path: |
+            ./node_modules
+            ./sveltecf/node_modules
           key: ${{ runner.os }}-pnpm-${{ hashFiles('./pnpm-lock.yaml') }}
       - name: Build
         run: pnpm run build
