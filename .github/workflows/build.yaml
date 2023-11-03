@@ -74,3 +74,5 @@ jobs:
         run: pnpm install --prefer-frozen-lockfile
       - name: Build
         run: pnpm run build
+      - name: Run main
+        run: pnpm run main
