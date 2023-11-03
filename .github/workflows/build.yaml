@@ -30,8 +30,8 @@ jobs:
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
       #     publish_dir: ./public
 
-  pnpm-install:
-    name: pnpm install
+  build-sveltecf:
+    name: Build sveltecf
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
@@ -44,36 +44,6 @@ jobs:
           version: '8'
       - name: Install dependencies
         run: pnpm install --prefer-frozen-lockfile
-      - name: Cache pnpm
-        uses: actions/cache@v3
-        with:
-          path: |
-            ./node_modules
-            ./sveltecf/node_modules
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('./pnpm-lock.yaml') }}
-
-  build-sveltecf:
-    name: Build sveltecf
-    runs-on: ubuntu-latest
-    timeout-minutes: 3
-    needs: pnpm-install
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '20'
-      - uses: pnpm/action-setup@v2
-        with:
-          version: '8'
-      # - name: Install dependencies
-      #   run: pnpm install --prefer-frozen-lockfile
-      - name: Restore Cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ./node_modules
-            ./sveltecf/node_modules
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('./pnpm-lock.yaml') }}
       - name: Build
         run: pnpm run build
       - name: Lint
@@ -89,7 +59,6 @@ jobs:
     name: Build uniproc
     runs-on: ubuntu-latest
     timeout-minutes: 3
-    needs: pnpm-install
     defaults:
       run:
         working-directory: ./uniproc
@@ -101,5 +70,7 @@ jobs:
       - uses: pnpm/action-setup@v2
         with:
           version: '8'
-      - name: Check
+      - name: Install dependencies
+        run: pnpm install --prefer-frozen-lockfile
+      - name: Build
         run: pnpm run build
