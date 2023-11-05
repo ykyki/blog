@@ -13,10 +13,7 @@ export const loadAllArticles = async (
             .map((filename) => path.join(articlePath, filename))
             .map(
                 async (filepath) =>
-                    new Article(
-                        filepath.split('/').pop() as string,
-                        await fs.readFile(filepath, 'utf-8'),
-                    ),
+                    new Article(await fs.readFile(filepath, 'utf-8')),
             ),
     );
 

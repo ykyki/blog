@@ -13,6 +13,8 @@
         "clean:dist": "rm -rf ./dist"
     },
     "devDependencies": {
+        "@types/js-yaml": "^4.0.8",
+        "@types/mdast": "^4.0.2",
         "@types/node": "^20.8.10",
         "esbuild": "0.19.5",
         "typescript": "^5.2.2"
@@ -23,10 +25,12 @@
         }
     },
     "dependencies": {
-        "rehype-stringify": "^10.0.0",
+        "js-yaml": "^4.1.0",
         "remark-frontmatter": "^5.0.0",
+        "remark-gfm": "^4.0.0",
+        "remark-math": "^6.0.0",
         "remark-parse": "^11.0.0",
-        "remark-rehype": "^11.0.0",
-        "unified": "^11.0.4"
+        "unified": "^11.0.4",
+        "zod": "^3.22.4"
     }
 }
