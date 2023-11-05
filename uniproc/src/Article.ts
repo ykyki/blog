@@ -13,7 +13,11 @@ export default class Article {
         this.source = source;
     }
 
-    get remarkTree(): Root {
+    get title(): string {
+        return this.frontmatter?.title ?? '<No title>';
+    }
+
+    private get remarkTree(): Root {
         return remarkProcessor().parse(this.source);
     }
 

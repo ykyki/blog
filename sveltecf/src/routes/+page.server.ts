@@ -9,8 +9,9 @@ export const load = (async () => {
     return {
         date: new Date().toISOString(),
         articles: artilces.map((article) => ({
-            title: article.getTitle(),
-            source: article.getSource(),
+            title: article.title,
+            frontmatter: JSON.stringify(article.frontmatter),
+            source: article.source,
         })),
     };
 }) satisfies PageServerLoad;
