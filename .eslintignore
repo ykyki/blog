@@ -3,3 +3,5 @@
 /.svelte-kit
 
 /hugos
+
+uniproc/src/main.ts
