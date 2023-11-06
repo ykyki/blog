@@ -1,7 +1,7 @@
-/build
-/dist
-/.svelte-kit
+build/
+dist/
+.svelte-kit/
 
-/hugos
+hugos/
 
 uniproc/src/main.ts
