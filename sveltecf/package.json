@@ -8,7 +8,7 @@
         "preview": "vite preview",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-        "test": "pnpm run -parallel \"/test:.+/\"",
+        "test": "pnpm run --parallel \"/test:.+/\"",
         "test:unit": "vitest run",
         "test:integration": "playwright test",
         "pages:dev": "wrangler pages dev --compatibility-date=2023-10-25 --proxy 5173 -- pnpm run dev",

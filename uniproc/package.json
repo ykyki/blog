@@ -6,7 +6,7 @@
     "scripts": {
         "main": "pnpm run build:main && node build/main.js",
         "build": "pnpm run --parallel \"/build:.+/\"",
-        "build:main": "esbuild src/main.ts --bundle --outfile=build/main.js --format=esm --platform=node --target=node20",
+        "build:main": "esbuild ./src/main.ts --bundle --outfile=build/main.js --format=esm --platform=node --target=node20",
         "build:dist": "tsc --outDir dist --declaration --target es2022 --moduleResolution node",
         "clean": "pnpm run --parallel \"/clean:.+/\"",
         "clean:build": "rm -rf ./build",
