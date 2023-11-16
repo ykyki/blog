@@ -10,9 +10,9 @@ import { loadAllArticles } from './loader';
 const contentPath = path.join(process.cwd(), '..', 'content');
 
 const articles = await loadAllArticles(contentPath);
-console.log(articles.map((article) => article.frontmatter));
+// console.log(articles.map((article) => article.frontmatter));
 
-const article = articles[2];
+const article = articles[3];
 
 const tree = unified()
     .use(remarkParse)
@@ -20,6 +20,8 @@ const tree = unified()
     .use(remarkGfm, { singleTilde: false })
     .use(remarkMath, { singleDollarTextMath: true })
     .parse(article.source);
+
+console.log('------------------');
 
 // console.log(tree);
 // console.log(tree.children);
@@ -30,15 +32,11 @@ const tree = unified()
 //     console.log(tree.children[i]);
 // }
 // console.log(JSON.stringify(tree.children, null, 2));
-// visit(tree, ['list', 'listItem'], (node) => {
+
+// visit(tree, (node) => {
 //     console.log(node);
 // });
 
-console.log('------------------abc');
-
-// console.log(articles[2].body);
-article.body.components.forEach((c) => {
-    if (c.type === 'list') {
-        console.log(c);
-    }
+article.body.components.forEach((c, i) => {
+    console.log('index', i, 'component', c);
 });
