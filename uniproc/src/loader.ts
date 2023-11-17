@@ -1,6 +1,6 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import Article from './Article';
+import Article from './article/Article';
 
 export const loadAllArticles = async (
     contentPath: string,

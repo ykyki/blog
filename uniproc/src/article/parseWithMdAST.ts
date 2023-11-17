@@ -5,27 +5,24 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import { is } from 'unist-util-is';
 import { visit } from 'unist-util-visit';
-import yaml from 'js-yaml';
-import { z } from 'zod';
-import { Root } from 'remark-parse/lib';
 import * as MdAST from 'mdast';
+import * as Schema from './schema';
+import { ArticleBody } from './Article';
+import { z } from 'zod';
+import yaml from 'js-yaml';
 
-export default class Article {
+export class ArticleParser {
     readonly source: string;
 
     constructor(source: string) {
         this.source = source;
     }
 
-    get title(): string {
-        return this.frontmatter?.title ?? '<No title>';
-    }
-
-    private get remarkTree(): Root {
+    private get remarkTree(): MdAST.Root {
         return remarkProcessor().parse(this.source);
     }
 
-    get frontmatter(): Frontmatter | undefined {
+    get frontmatter(): Schema.Frontmatter | undefined {
         return extractFrontmatter(this.remarkTree);
     }
 
@@ -34,110 +31,6 @@ export default class Article {
     }
 }
 
-type ArticleBody = {
-    headings: Heading[];
-    components: ArticleComponent[];
-};
-
-type ArticleComponent = Heading | DisplayComponent;
-type DisplayComponent = Paragraph | List | Code | Unclassified;
-type InlineComponent =
-    | Text
-    | Link
-    | InlineCode
-    | Emphasis
-    | Strong
-    | Unclassified;
-
-interface Heading extends IsParent {
-    type: 'heading';
-    depth: 1 | 2 | 3 | 4 | 5 | 6;
-    // TODO children: (Text | Link)[];
-    children: (Text | Unclassified)[];
-}
-
-interface Paragraph extends IsParent {
-    type: 'paragraph';
-    children: InlineComponent[];
-}
-
-interface List extends IsParent {
-    type: 'list';
-    ordered: boolean;
-    children: ListItem[];
-}
-
-interface ListItem extends IsParent {
-    type: 'listItem';
-    // TODO children: (Paragraph | List)[];
-    children: (ListItemPhrasing | List | Unclassified)[];
-}
-
-interface ListItemPhrasing extends IsParent {
-    type: 'listItemPhrasing';
-    children: InlineComponent[];
-}
-
-interface Code extends IsLeaf {
-    type: 'code';
-    lang?: string;
-    value: string;
-}
-
-interface Text extends IsLeaf, IsLiteral {
-    type: 'text';
-    value: string;
-}
-
-interface Link extends IsLeaf {
-    type: 'link';
-    url: string;
-    text?: string;
-}
-
-interface InlineCode extends IsLeaf, IsLiteral {
-    type: 'inlineCode';
-    value: string;
-}
-
-interface Emphasis extends IsLeaf, IsLiteral {
-    type: 'emphasis';
-    value: string;
-}
-
-interface Strong extends IsLeaf, IsLiteral {
-    type: 'strong';
-    value: string;
-}
-
-interface Unclassified extends IsNode {
-    type: 'unclassified';
-    typeValue: string;
-    value: string;
-}
-
-interface IsLiteral extends IsLeaf {
-    value: string;
-}
-
-interface IsNode {
-    type: string;
-}
-interface IsParent extends IsNode {
-    children: IsNode[];
-}
-
-interface IsLeaf extends IsNode {
-    // children: never | undefined;
-}
-
-const frontmatterSchema = z.object({
-    title: z.string(),
-    date: z.coerce.date(),
-    tags: z.array(z.string()),
-});
-type Frontmatter = z.infer<typeof frontmatterSchema>;
-
 const remarkProcessor = () =>
     unified()
         .use(remarkParse)
@@ -145,7 +38,15 @@ const remarkProcessor = () =>
         .use(remarkGfm, { singleTilde: false })
         .use(remarkMath, { singleDollarTextMath: true });
 
-const extractFrontmatter = (tree: Root): Frontmatter | undefined => {
+const frontmatterSchema = z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    tags: z.array(z.string()),
+});
+
+const extractFrontmatter = (
+    tree: MdAST.Root,
+): Schema.Frontmatter | undefined => {
     const node = tree.children[0];
     if (is(node, 'yaml')) {
         const meta = frontmatterSchema.safeParse(yaml.load(node.value));
@@ -157,12 +58,12 @@ const extractFrontmatter = (tree: Root): Frontmatter | undefined => {
     return undefined;
 };
 
-const extractArticleBody = (tree: Root): ArticleBody => {
+const extractArticleBody = (tree: MdAST.Root): ArticleBody => {
     const components = convertMdASTRoot(tree);
 
     const headings = components.filter(
-        (c): c is Heading => c.type === 'heading',
-    ) satisfies Heading[];
+        (c): c is Schema.Heading => c.type === 'heading',
+    ) satisfies Schema.Heading[];
 
     return {
         headings,
@@ -170,9 +71,9 @@ const extractArticleBody = (tree: Root): ArticleBody => {
     };
 };
 
-type Maybe<T extends IsNode> = T | Unclassified;
+type Maybe<T extends Schema.IsNode> = T | Schema.Unclassified;
 
-const convertMdASTRoot = (node: MdAST.Root): ArticleComponent[] => {
+const convertMdASTRoot = (node: MdAST.Root): Schema.ArticleComponent[] => {
     const children = node.children
         .filter((n) => !is(n, ['yaml']))
         .map((n) => {
@@ -195,7 +96,7 @@ const convertMdASTRoot = (node: MdAST.Root): ArticleComponent[] => {
     return children;
 };
 
-const convertMdASTHeading = (node: MdAST.Heading): Heading => {
+const convertMdASTHeading = (node: MdAST.Heading): Schema.Heading => {
     const children = node.children.map((n) => {
         switch (n.type) {
             case 'text':
@@ -213,10 +114,10 @@ const convertMdASTHeading = (node: MdAST.Heading): Heading => {
         type: 'heading',
         depth: node.depth,
         children,
-    } satisfies Heading;
+    } satisfies Schema.Heading;
 };
 
-const convertMdASTParagraph = (node: MdAST.Paragraph): Paragraph => {
+const convertMdASTParagraph = (node: MdAST.Paragraph): Schema.Paragraph => {
     const children = node.children.map((n) => {
         switch (n.type) {
             case 'text':
@@ -238,13 +139,13 @@ const convertMdASTParagraph = (node: MdAST.Paragraph): Paragraph => {
     return {
         type: 'paragraph',
         children,
-    } satisfies Paragraph;
+    } satisfies Schema.Paragraph;
 };
 
-const convertMdASTList = (node: MdAST.List): List => {
+const convertMdASTList = (node: MdAST.List): Schema.List => {
     const ordered = node?.ordered ?? false;
 
-    const children = [] as ListItem[];
+    const children = [] as Schema.ListItem[];
     visit(node, 'listItem', (n) => {
         children.push(covertMdASTListItem(n));
     });
@@ -253,10 +154,10 @@ const convertMdASTList = (node: MdAST.List): List => {
         type: 'list',
         ordered,
         children,
-    } satisfies List;
+    } satisfies Schema.List;
 };
 
-const covertMdASTListItem = (node: MdAST.ListItem): ListItem => {
+const covertMdASTListItem = (node: MdAST.ListItem): Schema.ListItem => {
     const children = node.children.map((n) => {
         switch (n.type) {
             case 'list':
@@ -273,12 +174,12 @@ const covertMdASTListItem = (node: MdAST.ListItem): ListItem => {
     return {
         type: 'listItem',
         children,
-    } satisfies ListItem;
+    } satisfies Schema.ListItem;
 };
 
 const convertMdASTParagraphToListItemPhrasing = (
     node: MdAST.Paragraph,
-): ListItemPhrasing => {
+): Schema.ListItemPhrasing => {
     const children = node.children.map((n) => {
         switch (n.type) {
             case 'text':
@@ -300,25 +201,25 @@ const convertMdASTParagraphToListItemPhrasing = (
     return {
         type: 'listItemPhrasing',
         children,
-    } satisfies ListItemPhrasing;
+    } satisfies Schema.ListItemPhrasing;
 };
 
-const convertMdASTCode = (node: MdAST.Code): Code => {
+const convertMdASTCode = (node: MdAST.Code): Schema.Code => {
     return {
         type: 'code',
         lang: node.lang ?? undefined,
         value: node.value,
-    } satisfies Code;
+    } satisfies Schema.Code;
 };
 
-const convertMdASTText = (node: MdAST.Text): Text => {
+const convertMdASTText = (node: MdAST.Text): Schema.Text => {
     return {
         type: 'text',
         value: node.value,
-    } satisfies Text;
+    } satisfies Schema.Text;
 };
 
-const convertMdASTLink = (node: MdAST.Link): Link => {
+const convertMdASTLink = (node: MdAST.Link): Schema.Link => {
     let text: string | undefined;
     if (node.children.length === 1 && is(node.children[0], 'text')) {
         text = node.children[0].value;
@@ -328,39 +229,39 @@ const convertMdASTLink = (node: MdAST.Link): Link => {
         type: 'link',
         url: node.url,
         text,
-    } satisfies Link;
+    } satisfies Schema.Link;
 };
 
-const convertMdASTInlineCode = (node: MdAST.InlineCode): InlineCode => {
+const convertMdASTInlineCode = (node: MdAST.InlineCode): Schema.InlineCode => {
     return {
         type: 'inlineCode',
         value: node.value,
-    } satisfies InlineCode;
+    } satisfies Schema.InlineCode;
 };
 
-const convertMdASTEmphasis = (node: MdAST.Emphasis): Maybe<Emphasis> => {
+const convertMdASTEmphasis = (node: MdAST.Emphasis): Maybe<Schema.Emphasis> => {
     if (node.children.length === 1 && is(node.children[0], 'text')) {
         return {
             type: 'emphasis',
             value: node.children[0].value,
-        } satisfies Emphasis;
+        } satisfies Schema.Emphasis;
     } else {
         return convertNodeToUnclassified(node);
     }
 };
 
-const convertMdASTStrong = (node: MdAST.Strong): Maybe<Strong> => {
+const convertMdASTStrong = (node: MdAST.Strong): Maybe<Schema.Strong> => {
     if (node.children.length === 1 && is(node.children[0], 'text')) {
         return {
             type: 'strong',
             value: node.children[0].value,
-        } satisfies Strong;
+        } satisfies Schema.Strong;
     } else {
         return convertNodeToUnclassified(node);
     }
 };
 
-const convertNodeToUnclassified = (node: MdAST.Node): Unclassified => {
+const convertNodeToUnclassified = (node: MdAST.Node): Schema.Unclassified => {
     let value = '';
     if ('value' in node && typeof node.value === 'string') {
         value = node.value;
