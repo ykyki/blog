@@ -1,0 +1,7 @@
+build/
+dist/
+.svelte-kit/
+
+hugos/
+
+uniproc/src/main.ts

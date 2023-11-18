@@ -1,0 +1,27 @@
+<script lang="ts">
+    import type { PageData } from './$types';
+
+    export let data: PageData;
+
+    const { date, articles } = data;
+</script>
+
+<h1>blog.ykyki.net</h1>
+<p>rendered at {date}</p>
+
+<hr />
+
+<h2>Articles</h2>
+<div>
+    <ol>
+        {#each articles as article}
+            <li>
+                <div>
+                    <h3>{article.title}</h3>
+                    <h4>{article.frontmatter}</h4>
+                    <p>{article.source}</p>
+                </div>
+            </li>
+        {/each}
+    </ol>
+</div>

@@ -1,20 +1,21 @@
-name: Build hugos🫂
+name: Build🔨
 
 on:
   push:
 
 jobs:
-  build:
-    name: Build hugo
+  build-hugos:
+    name: Build hugos
     runs-on: ubuntu-latest
+    timeout-minutes: 2
     defaults:
       run:
         working-directory: ./hugos
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: true  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+          submodules: true # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         # with:
@@ -28,3 +29,50 @@ jobs:
       #   with:
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
       #     publish_dir: ./public
+
+  build-sveltecf:
+    name: Build sveltecf
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: pnpm/action-setup@v2
+        with:
+          version: '8'
+      - name: Install dependencies
+        run: pnpm install --prefer-frozen-lockfile
+      - name: Build
+        run: pnpm run build
+      - name: Lint
+        run: pnpm run lint
+      - name: Check
+        run: pnpm sveltecf run check
+      - name: Install playwright
+        run: pnpm sveltecf exec playwright install --with-deps
+      - name: Test
+        run: pnpm sveltecf run test
+
+  build-uniproc:
+    name: Build uniproc
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    defaults:
+      run:
+        working-directory: ./uniproc
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: pnpm/action-setup@v2
+        with:
+          version: '8'
+      - name: Install dependencies
+        run: pnpm install --prefer-frozen-lockfile
+      - name: Build
+        run: pnpm run build
+      - name: Run main
+        run: pnpm run main

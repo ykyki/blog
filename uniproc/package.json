@@ -1,0 +1,38 @@
+{
+    "name": "uniproc",
+    "private": true,
+    "type": "module",
+    "main": "dist/lib.js",
+    "scripts": {
+        "main": "pnpm run build:main && node build/main.js",
+        "build": "pnpm run --parallel \"/build:.+/\"",
+        "build:main": "esbuild ./src/main.ts --bundle --outfile=build/main.js --format=esm --platform=node --target=node20",
+        "build:dist": "tsc --outDir dist --declaration --target es2022 --moduleResolution node",
+        "clean": "pnpm run --parallel \"/clean:.+/\"",
+        "clean:build": "rm -rf ./build",
+        "clean:dist": "rm -rf ./dist"
+    },
+    "devDependencies": {
+        "@types/js-yaml": "^4.0.8",
+        "@types/mdast": "^4.0.2",
+        "@types/node": "^20.8.10",
+        "esbuild": "0.19.5",
+        "typescript": "^5.2.2"
+    },
+    "exports": {
+        ".": {
+            "import": "./dist/lib.js"
+        }
+    },
+    "dependencies": {
+        "js-yaml": "^4.1.0",
+        "remark-frontmatter": "^5.0.0",
+        "remark-gfm": "^4.0.0",
+        "remark-math": "^6.0.0",
+        "remark-parse": "^11.0.0",
+        "unified": "^11.0.4",
+        "unist-util-is": "^6.0.0",
+        "unist-util-visit": "^5.0.0",
+        "zod": "^3.22.4"
+    }
+}

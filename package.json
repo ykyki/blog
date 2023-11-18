@@ -1,0 +1,18 @@
+{
+    "private": true,
+    "scripts": {
+        "build": "pnpm -F uniproc run build:dist  && pnpm -F sveltecf run build",
+        "lint": "eslint --ext .ts,.svelte ./",
+        "format": "prettier --write ./",
+        "format:dry": "prettier --check ./",
+        "sveltecf": "pnpm -F sveltecf",
+        "uniproc": "pnpm -F uniproc"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^6.0.0",
+        "@typescript-eslint/parser": "^6.0.0",
+        "eslint": "^8.28.0",
+        "eslint-config-prettier": "^8.5.0",
+        "prettier": "^2.8.0"
+    }
+}
