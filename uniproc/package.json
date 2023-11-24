@@ -10,7 +10,9 @@
         "build:dist": "tsc --project ./tsconfig.build.json && esbuild ./src/lib.ts --bundle --outfile=dist/lib.js --format=esm --platform=node --target=node20",
         "clean": "pnpm run --parallel \"/clean:.+/\"",
         "clean:build": "rm -rf ./build",
-        "clean:dist": "rm -rf ./dist"
+        "clean:dist": "rm -rf ./dist",
+        "test": "pnpm run test:bun",
+        "test:bun": "bun test"
     },
     "exports": {
         ".": {
