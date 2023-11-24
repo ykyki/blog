@@ -5,6 +5,7 @@
         "lint": "eslint --ext .ts,.svelte ./",
         "format": "prettier --write ./",
         "format:dry": "prettier --check ./",
+        "clean": "pnpm run --parallel \"/clean:.+/\"",
         "sveltecf": "pnpm -F sveltecf",
         "uniproc": "pnpm -F uniproc"
     },

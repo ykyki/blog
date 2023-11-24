@@ -12,7 +12,9 @@
         "test:unit": "vitest run",
         "test:integration": "playwright test",
         "pages:dev": "wrangler pages dev --compatibility-date=2023-10-25 --proxy 5173 -- pnpm run dev",
-        "pages:deploy": "pnpm run build && wrangler pages deploy .svelte-kit/cloudflare"
+        "pages:deploy": "pnpm run build && wrangler pages deploy .svelte-kit/cloudflare",
+        "clean": "pnpm run -F sveltecf --parallel \"/clean:.+/\"",
+        "clean:sveltekit": "rm -rf ./.svelte-kit"
     },
     "devDependencies": {
         "@playwright/test": "^1.28.1",

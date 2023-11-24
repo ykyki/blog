@@ -8,7 +8,6 @@
         "build": "pnpm run -F uniproc --parallel \"/build:.+/\"",
         "build:dist": "tsc --project ./tsconfig.build.json && tsc-alias -p ./tsconfig.build.json && bun run ./build.js",
         "clean": "pnpm run -F uniproc --parallel \"/clean:.+/\"",
-        "clean:build": "rm -rf ./build",
         "clean:dist": "rm -rf ./dist",
         "test": "pnpm run -F uniproc --parallel \"/test:.+/\"",
         "test:bun": "bun test"
