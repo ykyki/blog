@@ -6,10 +6,10 @@ import remarkMath from 'remark-math';
 import { is } from 'unist-util-is';
 import { visit } from 'unist-util-visit';
 import * as MdAST from 'mdast';
-import * as Schema from './schema';
-import { ArticleBody } from './Article';
 import { z } from 'zod';
 import yaml from 'js-yaml';
+import { ArticleBody } from '@src/article/Article';
+import * as Schema from '@src/article/schema';
 
 export class ArticleParser {
     readonly source: string;

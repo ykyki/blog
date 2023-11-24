@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { loadAllArticles } from './loader';
+import { loadAllArticles } from '@src/loader';
 
 const contentPath = path.join(process.cwd(), '..', 'content');
 

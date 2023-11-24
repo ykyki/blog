@@ -7,7 +7,7 @@
         "main": "pnpm run build:main && node build/main.js",
         "build": "pnpm run -F uniproc --parallel \"/build:.+/\"",
         "build:main": "esbuild ./src/main.ts --bundle --outfile=build/main.js --format=esm --platform=node --target=node20",
-        "build:dist": "tsc --project ./tsconfig.build.json && esbuild ./src/lib.ts --bundle --outfile=dist/lib.js --format=esm --platform=node --target=node20",
+        "build:dist": "tsc --project ./tsconfig.build.json && tsc-alias -p ./tsconfig.build.json && esbuild ./src/lib.ts --bundle --outfile=dist/lib.js --format=esm --platform=node --target=node20",
         "clean": "pnpm run -F uniproc --parallel \"/clean:.+/\"",
         "clean:build": "rm -rf ./build",
         "clean:dist": "rm -rf ./dist",
@@ -25,6 +25,7 @@
         "@types/node": "^20.8.10",
         "bun-types": "^1.0.14",
         "esbuild": "0.19.5",
+        "tsc-alias": "^1.8.8",
         "typescript": "^5.2.2"
     },
     "dependencies": {

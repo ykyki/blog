@@ -1,2 +1,2 @@
-export { default as Article } from './article/Article';
-export { loadAllArticles } from './loader';
+export { default as Article } from '@src/article/Article';
+export { loadAllArticles } from '@src/loader';

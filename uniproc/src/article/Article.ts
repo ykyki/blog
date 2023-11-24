@@ -1,5 +1,5 @@
-import { ArticleComponent, Frontmatter, Heading } from './schema';
-import { ArticleParser } from './parseWithMdAST';
+import { ArticleComponent, Frontmatter, Heading } from '@src/article/schema';
+import { ArticleParser } from '@src/article/parseWithMdAST';
 
 export default class Article {
     private readonly parser: ArticleParser;
