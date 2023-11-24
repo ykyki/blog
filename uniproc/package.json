@@ -12,6 +12,11 @@
         "clean:build": "rm -rf ./build",
         "clean:dist": "rm -rf ./dist"
     },
+    "exports": {
+        ".": {
+            "import": "./dist/lib.js"
+        }
+    },
     "devDependencies": {
         "@types/js-yaml": "^4.0.8",
         "@types/mdast": "^4.0.2",
@@ -19,11 +24,6 @@
         "bun-types": "^1.0.14",
         "esbuild": "0.19.5",
         "typescript": "^5.2.2"
-    },
-    "exports": {
-        ".": {
-            "import": "./dist/lib.js"
-        }
     },
     "dependencies": {
         "js-yaml": "^4.1.0",
