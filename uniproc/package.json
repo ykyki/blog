@@ -5,13 +5,13 @@
     "main": "dist/lib.js",
     "scripts": {
         "main": "pnpm run build:main && node build/main.js",
-        "build": "pnpm run --parallel \"/build:.+/\"",
+        "build": "pnpm run -F uniproc --parallel \"/build:.+/\"",
         "build:main": "esbuild ./src/main.ts --bundle --outfile=build/main.js --format=esm --platform=node --target=node20",
         "build:dist": "tsc --project ./tsconfig.build.json && esbuild ./src/lib.ts --bundle --outfile=dist/lib.js --format=esm --platform=node --target=node20",
-        "clean": "pnpm run --parallel \"/clean:.+/\"",
+        "clean": "pnpm run -F uniproc --parallel \"/clean:.+/\"",
         "clean:build": "rm -rf ./build",
         "clean:dist": "rm -rf ./dist",
-        "test": "pnpm run test:bun",
+        "test": "pnpm run -F uniproc --parallel \"/test:.+/\"",
         "test:bun": "bun test"
     },
     "exports": {
