@@ -108,6 +108,9 @@ importers:
       '@types/node':
         specifier: ^20.8.10
         version: 20.8.10
+      bun-types:
+        specifier: ^1.0.14
+        version: 1.0.14
       esbuild:
         specifier: 0.19.5
         version: 0.19.5
@@ -1384,6 +1387,10 @@ packages:
 
   /buffer-from@1.1.2:
     resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
+    dev: true
+
+  /bun-types@1.0.14:
+    resolution: {integrity: sha512-hLVfM2fk8xSJeobfuPGilfvxM5gLtEy1bn7RJhrtw3u4OaC0kieXKYFFTVHU8jZ3hj8YyPLIFClIUodkFSrMBQ==}
     dev: true
 
   /cac@6.7.14:

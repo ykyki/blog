@@ -7,7 +7,7 @@
         "main": "pnpm run build:main && node build/main.js",
         "build": "pnpm run --parallel \"/build:.+/\"",
         "build:main": "esbuild ./src/main.ts --bundle --outfile=build/main.js --format=esm --platform=node --target=node20",
-        "build:dist": "tsc --outDir dist --declaration --emitDeclarationOnly --target es2022 --moduleResolution node && esbuild ./src/lib.ts --bundle --outfile=dist/lib.js --format=esm --platform=node --target=node20",
+        "build:dist": "tsc --project ./tsconfig.build.json && esbuild ./src/lib.ts --bundle --outfile=dist/lib.js --format=esm --platform=node --target=node20",
         "clean": "pnpm run --parallel \"/clean:.+/\"",
         "clean:build": "rm -rf ./build",
         "clean:dist": "rm -rf ./dist"
@@ -16,6 +16,7 @@
         "@types/js-yaml": "^4.0.8",
         "@types/mdast": "^4.0.2",
         "@types/node": "^20.8.10",
+        "bun-types": "^1.0.14",
         "esbuild": "0.19.5",
         "typescript": "^5.2.2"
     },
