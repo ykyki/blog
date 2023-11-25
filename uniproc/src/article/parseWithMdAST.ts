@@ -8,9 +8,7 @@ import { visit } from 'unist-util-visit';
 import * as MdAST from 'mdast';
 import { z } from 'zod';
 import yaml from 'js-yaml';
-import * as Schema from '@src/schema/ArticleComponent';
-import { Frontmatter } from '@src/schema/Frontmatter';
-import { ArticleBody } from '@src/schema/Article';
+import * as Schema from '@src/schema/Schema';
 
 export class ArticleParser {
     readonly source: string;
@@ -23,11 +21,11 @@ export class ArticleParser {
         return remarkProcessor().parse(this.source);
     }
 
-    get frontmatter(): Frontmatter | undefined {
+    get frontmatter(): Schema.Frontmatter | undefined {
         return extractFrontmatter(this.remarkTree);
     }
 
-    get body(): ArticleBody {
+    get body(): Schema.ArticleBody {
         return extractArticleBody(this.remarkTree);
     }
 }
@@ -45,7 +43,9 @@ const frontmatterSchema = z.object({
     tags: z.array(z.string()),
 });
 
-const extractFrontmatter = (tree: MdAST.Root): Frontmatter | undefined => {
+const extractFrontmatter = (
+    tree: MdAST.Root,
+): Schema.Frontmatter | undefined => {
     const node = tree.children[0];
     if (is(node, 'yaml')) {
         const meta = frontmatterSchema.safeParse(yaml.load(node.value));
@@ -57,7 +57,7 @@ const extractFrontmatter = (tree: MdAST.Root): Frontmatter | undefined => {
     return undefined;
 };
 
-const extractArticleBody = (tree: MdAST.Root): ArticleBody => {
+const extractArticleBody = (tree: MdAST.Root): Schema.ArticleBody => {
     const components = convertMdASTRoot(tree);
 
     const headings = components.filter(

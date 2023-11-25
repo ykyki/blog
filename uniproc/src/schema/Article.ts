@@ -1,5 +1,5 @@
-import { ArticleComponent, Heading } from '@src/schema/ArticleComponent';
-import { Frontmatter } from '@src/schema/Frontmatter';
+import { ArticleComponent, Heading } from './ArticleComponent';
+import { Frontmatter } from './Frontmatter';
 
 export type Article = {
     title: string;

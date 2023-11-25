@@ -1,6 +1,5 @@
+import * as Schema from '@src/schema/Schema';
 import { ArticleParser } from '@src/article/parseWithMdAST';
-import { Frontmatter } from '@src/schema/Frontmatter';
-import { ArticleBody } from '@src/schema/Article';
 
 export default class Article {
     private readonly parser: ArticleParser;
@@ -13,11 +12,11 @@ export default class Article {
         return this.frontmatter?.title ?? '<No title>';
     }
 
-    get frontmatter(): Frontmatter | undefined {
+    get frontmatter(): Schema.Frontmatter | undefined {
         return this.parser.frontmatter;
     }
 
-    get body(): ArticleBody {
+    get body(): Schema.ArticleBody {
         return this.parser.body;
     }
 }
