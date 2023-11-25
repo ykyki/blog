@@ -6,11 +6,14 @@
 </script>
 
 {#if component.type === 'heading'}
-    <h2>
+    {@const depth = component.depth}
+    {@const level = Math.min(depth, 6)}
+    <svelte:element this={`h${level}`}>
+        {'#'.repeat(depth)}
         {#each component.children as child}
             <InlineComponent component={child} />
         {/each}
-    </h2>
+    </svelte:element>
 {:else if component.type === 'paragraph'}
     <p>
         {#each component.children as child}<InlineComponent

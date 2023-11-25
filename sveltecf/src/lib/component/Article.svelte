@@ -4,9 +4,13 @@
     import type { Schema } from 'uniproc';
 
     export let article: Schema.Article;
+    export let titleLink: string | undefined = undefined;
 </script>
 
-<h1>{article.title}</h1>
+<h1>
+    {#if titleLink}<a href={titleLink}>{article.title}</a
+        >{:else}{article.title}{/if}
+</h1>
 
 <div>
     <dvi>date: {article.frontmatter.date.toString()}</dvi>
@@ -28,8 +32,8 @@
     </ul>
 </div>
 
-<div>
+<article>
     {#each article.root.children as component}
         <DisplayComponent {component} />
     {/each}
-</div>
+</article>

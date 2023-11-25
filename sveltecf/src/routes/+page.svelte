@@ -14,13 +14,9 @@
 
 <h2>Articles</h2>
 <div>
-    <ol>
-        {#each articles as article, index}
-            <li>
-                <a href="/article/{index}">{article.title}</a>
-                <Article {article} />
-                <hr />
-            </li>
-        {/each}
-    </ol>
+    {#each articles as article, index}
+        {@const titleLink = `/article/${index}`}
+        <Article {titleLink} {article} />
+        <hr />
+    {/each}
 </div>
