@@ -13,7 +13,10 @@ export const loadAllArticleEntityList = async (
             .map((filename) => path.join(articlePath, filename))
             .map(
                 async (filepath) =>
-                    new ArticleEntity(await fs.readFile(filepath, 'utf-8')),
+                    new ArticleEntity(
+                        await fs.readFile(filepath, 'utf-8'),
+                        filepath,
+                    ),
             ),
     );
 

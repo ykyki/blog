@@ -1,16 +1,24 @@
-import { expect, test } from 'bun:test';
+import { expect, test, describe } from 'bun:test';
 import path from 'node:path';
 import { loadAllArticleEntityList } from '@src/loader';
 
-test('load all articles from content/ without exception', async () => {
-    const contentPath = path.join(process.cwd(), '..', 'content');
+const contentPath = path.join(process.cwd(), '..', 'content');
 
+test('loadAllArticleEntityListに成功', async () => {
+    expect(async () => {
+        await loadAllArticleEntityList(contentPath);
+    }).not.toThrow();
+});
+
+describe('各要素の読み込みに成功', async () => {
     const articles = await loadAllArticleEntityList(contentPath);
 
-    // TODO 明確なassertionを書く
     articles.forEach((article) => {
-        expect(article.title).toBeTruthy();
-        expect(article.frontmatter).toBeTruthy();
-        expect(article.body).toBeTruthy();
+        test(article.path, () => {
+            // TODO 明確なassertionを書く
+            expect(article.title).toBeTruthy();
+            expect(article.frontmatter).toBeTruthy();
+            expect(article.body).toBeTruthy();
+        });
     });
 });

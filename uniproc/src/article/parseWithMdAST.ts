@@ -45,14 +45,16 @@ const frontmatterSchema = z.object({
 
 const extractFrontmatter = (tree: MdAST.Root): Schema.Frontmatter => {
     const node = tree.children[0];
-    if (is(node, 'yaml')) {
-        const meta = frontmatterSchema.safeParse(yaml.load(node.value));
-
-        if (meta.success) {
-            return meta.data;
-        }
+    if (!is(node, 'yaml')) {
+        throw new Error('Head node must be yaml');
     }
-    throw new Error('Frontmatter is not found');
+
+    const meta = frontmatterSchema.safeParse(yaml.load(node.value));
+    if (!meta.success) {
+        throw new Error('Ill-formed frontmatter');
+    }
+
+    return meta.data;
 };
 
 const extractArticleBody = (tree: MdAST.Root): Schema.ArticleBody => {
