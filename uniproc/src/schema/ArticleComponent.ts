@@ -16,7 +16,7 @@ export interface Heading extends IsParent {
     type: 'heading';
     depth: 1 | 2 | 3 | 4 | 5 | 6;
     // TODO children: (Text | Link)[];
-    children: (Text | Unclassified)[];
+    children: Text[];
 }
 
 export interface Paragraph extends IsParent {
@@ -32,13 +32,7 @@ export interface List extends IsParent {
 
 export interface ListItem extends IsParent {
     type: 'listItem';
-    // TODO children: (Paragraph | List)[];
-    children: (ListItemPhrasing | List | Unclassified)[];
-}
-
-export interface ListItemPhrasing extends IsParent {
-    type: 'listItemPhrasing';
-    children: InlineComponent[];
+    children: (InlineComponent | List | Code)[];
 }
 
 export interface Code extends IsLeaf {

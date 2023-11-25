@@ -103,7 +103,7 @@ const convertMdASTHeading = (node: MdAST.Heading): Schema.Heading => {
             case 'emphasis':
             case 'strong':
             default:
-                return convertNodeToUnclassified(n);
+                throw new Error(`Unsupported heading children: ${n.type}`);
         }
     });
 
@@ -155,16 +155,18 @@ const convertMdASTList = (node: MdAST.List): Schema.List => {
 };
 
 const covertMdASTListItem = (node: MdAST.ListItem): Schema.ListItem => {
-    const children = node.children.map((n) => {
+    const children = node.children.flatMap((n): Schema.ListItem['children'] => {
         switch (n.type) {
             case 'list':
-                return convertMdASTList(n);
+                return [convertMdASTList(n)];
             case 'paragraph':
-                return convertMdASTParagraphToListItemPhrasing(n);
+                return convertMdASTParagraph(n).children;
+            case 'code':
+                return [convertMdASTCode(n)];
             case 'definition':
             case 'footnoteDefinition':
             default:
-                return convertNodeToUnclassified(n);
+                throw new Error(`Unsupported list item children: ${n.type}`);
         }
     });
 
@@ -172,33 +174,6 @@ const covertMdASTListItem = (node: MdAST.ListItem): Schema.ListItem => {
         type: 'listItem',
         children,
     } satisfies Schema.ListItem;
-};
-
-const convertMdASTParagraphToListItemPhrasing = (
-    node: MdAST.Paragraph,
-): Schema.ListItemPhrasing => {
-    const children = node.children.map((n) => {
-        switch (n.type) {
-            case 'text':
-                return convertMdASTText(n);
-            case 'link':
-                return convertMdASTLink(n);
-            case 'inlineCode':
-                return convertMdASTInlineCode(n);
-            case 'emphasis':
-                return convertMdASTEmphasis(n);
-            case 'strong':
-                return convertMdASTStrong(n);
-            case 'inlineMath': // TODO
-            default:
-                return convertNodeToUnclassified(n);
-        }
-    });
-
-    return {
-        type: 'listItemPhrasing',
-        children,
-    } satisfies Schema.ListItemPhrasing;
 };
 
 const convertMdASTCode = (node: MdAST.Code): Schema.Code => {

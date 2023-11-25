@@ -55,3 +55,46 @@ date: 2021-01-01`,
         });
     });
 });
+
+describe('parse list', () => {
+    describe('success', () => {
+        const tests = [
+            {
+                name: 'リスト1',
+                source: `- list1
+            `,
+            },
+            {
+                name: 'リスト1',
+                source: `
+- list1
+- list2
+`.trim(),
+            },
+            {
+                name: 'ネストしたリスト',
+                source: `
+- list1
+  - list1.1
+  - list1.2
+- list2
+- list3
+  - list3.1
+    - list3.1.1
+    - list3.1.2
+      - list3.1.2.1
+  - list3.2
+- list4
+`.trim(),
+            },
+        ];
+
+        tests.forEach(({ name, source }) => {
+            test(name, () => {
+                const parser = new ArticleParser(source);
+
+                expect(parser.root).toBeDefined();
+            });
+        });
+    });
+});
