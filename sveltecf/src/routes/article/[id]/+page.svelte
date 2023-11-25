@@ -4,7 +4,7 @@
 
     export let data: PageData;
 
-    const { id, article } = data;
+    const { article } = data;
 </script>
 
 <svelte:head>
