@@ -1,7 +1,7 @@
 import * as Schema from '@src/schema/Schema';
 import { ArticleParser } from '@src/article/parseWithMdAST';
 
-export default class ArticleEntity implements Schema.Article {
+export default class ArticleEntity {
     private readonly parser: ArticleParser;
     readonly path: string;
 
@@ -21,4 +21,12 @@ export default class ArticleEntity implements Schema.Article {
     get body(): Schema.ArticleBody {
         return this.parser.body;
     }
+
+    toArticle = (): Schema.Article => {
+        return {
+            title: this.title,
+            frontmatter: this.frontmatter,
+            body: this.body,
+        };
+    };
 }
