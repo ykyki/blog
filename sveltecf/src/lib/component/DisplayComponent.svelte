@@ -20,13 +20,29 @@
     {#if component.ordered}
         <ol>
             {#each component.children as child}
-                <li>TODO: {JSON.stringify(child)}</li>
+                <li>
+                    {#each child.children as grandChild}
+                        {#if grandChild.type === 'list' || grandChild.type === 'code'}
+                            <svelte:self component={grandChild} />
+                        {:else}
+                            <InlineComponent component={grandChild} />
+                        {/if}
+                    {/each}
+                </li>
             {/each}
         </ol>
     {:else}
         <ul>
             {#each component.children as child}
-                <li>TODO: {JSON.stringify(child)}</li>
+                <li>
+                    {#each child.children as grandChild}
+                        {#if grandChild.type === 'list' || grandChild.type === 'code'}
+                            <svelte:self component={grandChild} />
+                        {:else}
+                            <InlineComponent component={grandChild} />
+                        {/if}
+                    {/each}
+                </li>
             {/each}
         </ul>
     {/if}

@@ -20,7 +20,7 @@
 <div>
     Table of Contents:
     <ul>
-        {#each article.body.headings as heading}
+        {#each article.headings as heading}
             <li>
                 <InlineComponent component={heading} />
             </li>
@@ -29,7 +29,7 @@
 </div>
 
 <div>
-    {#each article.body.components as component}
+    {#each article.root.children as component}
         <DisplayComponent {component} />
     {/each}
 </div>
