@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Article from '$lib/component/Article.svelte';
     import type { PageData } from './$types';
 
     export let data: PageData;
@@ -14,13 +15,11 @@
 <h2>Articles</h2>
 <div>
     <ol>
-        {#each articles as article}
+        {#each articles as article, index}
             <li>
-                <div>
-                    <h3>{article.title}</h3>
-                    <h4>{article.frontmatter}</h4>
-                    <p>{article.source}</p>
-                </div>
+                <a href="/article/{index}">{article.title}</a>
+                <Article {article} />
+                <hr />
             </li>
         {/each}
     </ol>

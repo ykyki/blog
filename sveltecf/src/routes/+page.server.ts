@@ -4,14 +4,10 @@ import type { PageServerLoad } from './$types';
 export const prerender = true;
 
 export const load = (async () => {
-    const artilces = await fetchAllArticles();
+    const articles = await fetchAllArticles();
 
     return {
         date: new Date().toISOString(),
-        articles: artilces.map((article) => ({
-            title: article.title,
-            frontmatter: JSON.stringify(article.frontmatter), // TODO
-            source: JSON.stringify(article.body), // TODO
-        })),
+        articles,
     };
 }) satisfies PageServerLoad;
