@@ -19,7 +19,8 @@ describe('loadAllArticleEntities', () => {
                 // TODO 明確なassertionを書く
                 expect(article.title).toBeTruthy();
                 expect(article.frontmatter).toBeTruthy();
-                expect(article.body).toBeTruthy();
+                expect(article.headings).toBeTruthy();
+                expect(article.root).toBeTruthy();
             });
         });
     });

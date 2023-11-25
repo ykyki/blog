@@ -25,8 +25,16 @@ export class ArticleParser {
         return extractFrontmatter(this.remarkTree);
     }
 
-    get body(): Schema.ArticleBody {
-        return extractArticleBody(this.remarkTree);
+    get headings(): Schema.Heading[] {
+        const headings = this.root.children.filter(
+            (c): c is Schema.Heading => c.type === 'heading',
+        ) satisfies Schema.Heading[];
+
+        return headings;
+    }
+
+    get root(): Schema.Root {
+        return convertMdASTRoot(this.remarkTree);
     }
 }
 
@@ -57,22 +65,9 @@ const extractFrontmatter = (tree: MdAST.Root): Schema.Frontmatter => {
     return meta.data;
 };
 
-const extractArticleBody = (tree: MdAST.Root): Schema.ArticleBody => {
-    const components = convertMdASTRoot(tree);
-
-    const headings = components.filter(
-        (c): c is Schema.Heading => c.type === 'heading',
-    ) satisfies Schema.Heading[];
-
-    return {
-        headings,
-        components,
-    };
-};
-
 type Maybe<T extends Schema.IsNode> = T | Schema.Unclassified;
 
-const convertMdASTRoot = (node: MdAST.Root): Schema.ArticleComponent[] => {
+const convertMdASTRoot = (node: MdAST.Root): Schema.Root => {
     const children = node.children
         .filter((n) => !is(n, ['yaml']))
         .map((n) => {
@@ -92,7 +87,10 @@ const convertMdASTRoot = (node: MdAST.Root): Schema.ArticleComponent[] => {
             }
         });
 
-    return children;
+    return {
+        type: 'root',
+        children,
+    } satisfies Schema.Root;
 };
 
 const convertMdASTHeading = (node: MdAST.Heading): Schema.Heading => {

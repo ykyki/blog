@@ -1,4 +1,3 @@
-export type ArticleComponent = Heading | DisplayComponent;
 export type DisplayComponent = Paragraph | List | Code | Unclassified;
 export type InlineComponent =
     | Text
@@ -7,6 +6,11 @@ export type InlineComponent =
     | Emphasis
     | Strong
     | Unclassified;
+
+export interface Root extends IsParent {
+    type: 'root';
+    children: (Heading | DisplayComponent)[];
+}
 
 export interface Heading extends IsParent {
     type: 'heading';

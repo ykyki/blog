@@ -18,15 +18,20 @@ export default class ArticleEntity {
         return this.parser.frontmatter;
     }
 
-    get body(): Schema.ArticleBody {
-        return this.parser.body;
+    get headings(): Schema.Heading[] {
+        return this.parser.headings;
+    }
+
+    get root(): Schema.Root {
+        return this.parser.root;
     }
 
     toArticle = (): Schema.Article => {
         return {
             title: this.title,
             frontmatter: this.frontmatter,
-            body: this.body,
+            headings: this.headings,
+            root: this.root,
         };
     };
 }
