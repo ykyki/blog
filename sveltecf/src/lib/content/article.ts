@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { Article, loadAllArticles } from 'uniproc';
+import {  loadAllArticles, type Article } from 'uniproc';
 
 const cache = {
     articles: undefined,

@@ -1,7 +1,7 @@
 import * as Schema from '@src/schema/Schema';
 import { ArticleParser } from '@src/article/parseWithMdAST';
 
-export default class Article {
+export default class ArticleEntity implements Schema.Article {
     private readonly parser: ArticleParser;
 
     constructor(source: string) {
@@ -12,7 +12,7 @@ export default class Article {
         return this.frontmatter?.title ?? '<No title>';
     }
 
-    get frontmatter(): Schema.Frontmatter | undefined {
+    get frontmatter(): Schema.Frontmatter {
         return this.parser.frontmatter;
     }
 

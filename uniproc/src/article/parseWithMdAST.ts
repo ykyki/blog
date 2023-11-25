@@ -21,7 +21,7 @@ export class ArticleParser {
         return remarkProcessor().parse(this.source);
     }
 
-    get frontmatter(): Schema.Frontmatter | undefined {
+    get frontmatter(): Schema.Frontmatter {
         return extractFrontmatter(this.remarkTree);
     }
 
@@ -43,9 +43,7 @@ const frontmatterSchema = z.object({
     tags: z.array(z.string()),
 });
 
-const extractFrontmatter = (
-    tree: MdAST.Root,
-): Schema.Frontmatter | undefined => {
+const extractFrontmatter = (tree: MdAST.Root): Schema.Frontmatter => {
     const node = tree.children[0];
     if (is(node, 'yaml')) {
         const meta = frontmatterSchema.safeParse(yaml.load(node.value));
@@ -54,7 +52,7 @@ const extractFrontmatter = (
             return meta.data;
         }
     }
-    return undefined;
+    throw new Error('Frontmatter is not found');
 };
 
 const extractArticleBody = (tree: MdAST.Root): Schema.ArticleBody => {
