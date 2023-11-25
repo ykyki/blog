@@ -1,11 +1,6 @@
 <script lang="ts">
-    import { text } from '@sveltejs/kit';
-    import type {
-        Heading,
-        InlineComponent,
-    } from 'uniproc/dist/schema/ArticleComponent';
-
-    export let component: InlineComponent | Heading;
+    import type { Schema } from 'uniproc';
+    export let component: Schema.InlineComponent | Schema.Heading;
 </script>
 
 {#if component.type === 'text'}

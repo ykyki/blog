@@ -1,6 +1,7 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import ArticleEntity from '@src/article/ArticleEntity';
+import { Schema } from '@src/lib';
 
 export const loadAllArticleEntityList = async (
     contentPath: string,
@@ -21,4 +22,12 @@ export const loadAllArticleEntityList = async (
     );
 
     return articles;
+};
+
+export const loadAllArticles = async (
+    contentPath: string,
+): Promise<Schema.Article[]> => {
+    return (await loadAllArticleEntityList(contentPath)).map((v) =>
+        v.toArticle(),
+    );
 };

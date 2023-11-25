@@ -1,15 +1,15 @@
 import path from 'node:path';
-import {  loadAllArticles, type Article } from 'uniproc';
+import {  loadAllArticles, type Schema } from 'uniproc';
 
 const cache = {
     articles: undefined,
 } as {
-    articles: Article[] | undefined;
+    articles: Schema.Article[] | undefined;
 };
 
 const contentPath = path.join(process.cwd(), '..', 'content');
 
-export const fetchAllArticles = async (): Promise<Article[]> => {
+export const fetchAllArticles = async (): Promise<Schema.Article[]> => {
     if (cache.articles !== undefined) {
         return cache.articles;
     }

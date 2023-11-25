@@ -1,9 +1,9 @@
 <script lang="ts">
     import DisplayComponent from '$lib/component/DisplayComponent.svelte';
     import InlineComponent from '$lib/component/InlineComponent.svelte';
-    import type { Article } from 'uniproc/dist/schema/Article';
+    import type { Schema } from 'uniproc';
 
-    export let article: Article;
+    export let article: Schema.Article;
 </script>
 
 <h1>{article.title}</h1>

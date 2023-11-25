@@ -1,11 +1,8 @@
 <script lang="ts">
-    import type {
-        DisplayComponent,
-        Heading,
-    } from 'uniproc/dist/schema/ArticleComponent';
+    import type { Schema } from 'uniproc';
     import InlineComponent from './InlineComponent.svelte';
 
-    export let component: DisplayComponent | Heading;
+    export let component: Schema.DisplayComponent | Schema.Heading;
 </script>
 
 {#if component.type === 'heading'}
