@@ -1,5 +1,6 @@
-import { ArticleComponent, Frontmatter, Heading } from '@src/article/schema';
 import { ArticleParser } from '@src/article/parseWithMdAST';
+import { Frontmatter } from '@src/schema/Frontmatter';
+import { ArticleBody } from '@src/schema/Article';
 
 export default class Article {
     private readonly parser: ArticleParser;
@@ -20,8 +21,3 @@ export default class Article {
         return this.parser.body;
     }
 }
-
-export type ArticleBody = {
-    headings: Heading[];
-    components: ArticleComponent[];
-};

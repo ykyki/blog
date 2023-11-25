@@ -8,8 +8,9 @@ import { visit } from 'unist-util-visit';
 import * as MdAST from 'mdast';
 import { z } from 'zod';
 import yaml from 'js-yaml';
-import { ArticleBody } from '@src/article/Article';
-import * as Schema from '@src/article/schema';
+import * as Schema from '@src/schema/ArticleComponent';
+import { Frontmatter } from '@src/schema/Frontmatter';
+import { ArticleBody } from '@src/schema/Article';
 
 export class ArticleParser {
     readonly source: string;
@@ -22,7 +23,7 @@ export class ArticleParser {
         return remarkProcessor().parse(this.source);
     }
 
-    get frontmatter(): Schema.Frontmatter | undefined {
+    get frontmatter(): Frontmatter | undefined {
         return extractFrontmatter(this.remarkTree);
     }
 
@@ -44,9 +45,7 @@ const frontmatterSchema = z.object({
     tags: z.array(z.string()),
 });
 
-const extractFrontmatter = (
-    tree: MdAST.Root,
-): Schema.Frontmatter | undefined => {
+const extractFrontmatter = (tree: MdAST.Root): Frontmatter | undefined => {
     const node = tree.children[0];
     if (is(node, 'yaml')) {
         const meta = frontmatterSchema.safeParse(yaml.load(node.value));

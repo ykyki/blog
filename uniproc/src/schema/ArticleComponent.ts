@@ -1,9 +1,3 @@
-export type Frontmatter = {
-    title: string;
-    date: Date;
-    tags: string[];
-};
-
 export type ArticleComponent = Heading | DisplayComponent;
 export type DisplayComponent = Paragraph | List | Code | Unclassified;
 export type InlineComponent =
