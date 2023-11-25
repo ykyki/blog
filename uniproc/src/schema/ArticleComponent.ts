@@ -1,11 +1,11 @@
-export type DisplayComponent = Paragraph | List | Code | Unclassified;
+export type DisplayComponent = Paragraph | List | Code | DisplayMath;
 export type InlineComponent =
     | Text
     | Link
     | InlineCode
     | Emphasis
     | Strong
-    | Unclassified;
+    | InlineMath;
 
 export interface Root extends IsParent {
     type: 'root';
@@ -67,9 +67,13 @@ export interface Strong extends IsLeaf, IsLiteral {
     value: string;
 }
 
-export interface Unclassified extends IsNode {
-    type: 'unclassified';
-    typeValue: string;
+export interface DisplayMath extends IsLeaf, IsLiteral {
+    type: 'displayMath';
+    value: string;
+}
+
+export interface InlineMath extends IsLeaf, IsLiteral {
+    type: 'inlineMath';
     value: string;
 }
 

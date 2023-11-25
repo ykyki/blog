@@ -6,6 +6,7 @@ import remarkMath from 'remark-math';
 import { is } from 'unist-util-is';
 import { visit } from 'unist-util-visit';
 import * as MdAST from 'mdast';
+import * as MdASTMath from 'mdast-util-math';
 import { z } from 'zod';
 import yaml from 'js-yaml';
 import * as Schema from '@src/schema/Schema';
@@ -65,8 +66,6 @@ const extractFrontmatter = (tree: MdAST.Root): Schema.Frontmatter => {
     return meta.data;
 };
 
-type Maybe<T extends Schema.IsNode> = T | Schema.Unclassified;
-
 const convertMdASTRoot = (node: MdAST.Root): Schema.Root => {
     const children = node.children
         .filter((n) => !is(n, ['yaml']))
@@ -80,10 +79,12 @@ const convertMdASTRoot = (node: MdAST.Root): Schema.Root => {
                     return convertMdASTParagraph(n);
                 case 'list':
                     return convertMdASTList(n);
+                case 'math':
+                    return convertMdASTMath(n as MdASTMath.Math);
                 case 'definition':
                 case 'footnoteDefinition':
                 default:
-                    return convertNodeToUnclassified(n);
+                    throw new Error(`Unsupported root children: ${n.type}`);
             }
         });
 
@@ -127,9 +128,10 @@ const convertMdASTParagraph = (node: MdAST.Paragraph): Schema.Paragraph => {
                 return convertMdASTEmphasis(n);
             case 'strong':
                 return convertMdASTStrong(n);
-            case 'inlineMath': // TODO
+            case 'inlineMath':
+                return convertMdASTInlineMath(n);
             default:
-                return convertNodeToUnclassified(n);
+                throw new Error(`Unsupported paragraph children: ${n.type}`);
         }
     });
 
@@ -211,37 +213,38 @@ const convertMdASTInlineCode = (node: MdAST.InlineCode): Schema.InlineCode => {
     } satisfies Schema.InlineCode;
 };
 
-const convertMdASTEmphasis = (node: MdAST.Emphasis): Maybe<Schema.Emphasis> => {
+const convertMdASTEmphasis = (node: MdAST.Emphasis): Schema.Emphasis => {
     if (node.children.length === 1 && is(node.children[0], 'text')) {
         return {
             type: 'emphasis',
             value: node.children[0].value,
         } satisfies Schema.Emphasis;
-    } else {
-        return convertNodeToUnclassified(node);
     }
+    throw new Error('Ill-formed emphasis' + JSON.stringify(node));
 };
 
-const convertMdASTStrong = (node: MdAST.Strong): Maybe<Schema.Strong> => {
+const convertMdASTStrong = (node: MdAST.Strong): Schema.Strong => {
     if (node.children.length === 1 && is(node.children[0], 'text')) {
         return {
             type: 'strong',
             value: node.children[0].value,
         } satisfies Schema.Strong;
-    } else {
-        return convertNodeToUnclassified(node);
     }
+    throw new Error('Ill-formed strong' + JSON.stringify(node));
 };
 
-const convertNodeToUnclassified = (node: MdAST.Node): Schema.Unclassified => {
-    let value = '';
-    if ('value' in node && typeof node.value === 'string') {
-        value = node.value;
-    }
-
+const convertMdASTMath = (node: MdASTMath.Math): Schema.DisplayMath => {
     return {
-        type: 'unclassified',
-        typeValue: node.type,
-        value,
-    };
+        type: 'displayMath',
+        value: node.value,
+    } satisfies Schema.DisplayMath;
+};
+
+const convertMdASTInlineMath = (
+    node: MdASTMath.InlineMath,
+): Schema.InlineMath => {
+    return {
+        type: 'inlineMath',
+        value: node.value,
+    } satisfies Schema.InlineMath;
 };
