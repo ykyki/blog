@@ -1,9 +1,9 @@
 import path from 'node:path';
-import { loadAllArticleEntityList } from '@src/loader';
+import { loadAllArticleEntities } from '@src/loader';
 
 const contentPath = path.join(process.cwd(), '..', 'content');
 
-const articles = await loadAllArticleEntityList(contentPath);
+const articles = await loadAllArticleEntities(contentPath);
 // console.log(articles.map((article) => article.frontmatter));
 
 const article = articles[3];

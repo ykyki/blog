@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import ArticleEntity from '@src/article/ArticleEntity';
 import { Schema } from '@src/lib';
 
-export const loadAllArticleEntityList = async (
+export const loadAllArticleEntities = async (
     contentPath: string,
 ): Promise<ArticleEntity[]> => {
     const articlePath = path.join(contentPath, '2021');
@@ -27,7 +27,7 @@ export const loadAllArticleEntityList = async (
 export const loadAllArticles = async (
     contentPath: string,
 ): Promise<Schema.Article[]> => {
-    return (await loadAllArticleEntityList(contentPath)).map((v) =>
-        v.toArticle(),
+    return (await loadAllArticleEntities(contentPath)).map((entity) =>
+        entity.toArticle(),
     );
 };
