@@ -6,7 +6,34 @@
     "linter": {
         "enabled": true,
         "rules": {
-            "all": true
+            "all": true,
+            "complexity": {
+                "noForEach": "warn"
+            }
+        }
+    },
+    "formatter": {
+        "enabled": true,
+        "formatWithErrors": false,
+        "ignore": [],
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineWidth": 80
+    },
+    "json": {
+        "parser": {
+            "allowComments": true,
+            "allowTrailingCommas": false
+        }
+    },
+    "javascript": {
+        "formatter": {
+            "quoteStyle": "single",
+            "jsxQuoteStyle": "double",
+            "trailingComma": "all",
+            "semicolons": "always",
+            "arrowParentheses": "always",
+            "quoteProperties": "asNeeded"
         }
     }
 }

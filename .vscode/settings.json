@@ -4,7 +4,7 @@
         "quickfix.biome": true,
         "source.organizeImports.biome": true
     },
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    // "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[javascript]": {
         "editor.defaultFormatter": "biomejs.biome"
     },
@@ -17,9 +17,11 @@
     "[typescriptreact]": {
         "editor.defaultFormatter": "biomejs.biome"
     },
-    "json.format.enable": false,
+    "[json]": {
+        "editor.defaultFormatter": "biomejs.biome"
+    },
     "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "biomejs.biome"
     },
     "[yaml]": {
         "editor.insertSpaces": true,
