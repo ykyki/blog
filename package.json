@@ -2,7 +2,7 @@
     "private": true,
     "scripts": {
         "build": "pnpm -F uniproc run build:dist  && pnpm -F sveltecf run build",
-        "lint": "eslint --ext .ts,.svelte ./",
+        "lint": "pnpm run --parallel \"/lint:.+/\"",
         "format": "prettier --write ./",
         "format:dry": "prettier --check ./",
         "clean": "pnpm run --parallel \"/clean:.+/\"",

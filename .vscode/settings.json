@@ -4,7 +4,6 @@
         "quickfix.biome": true,
         "source.organizeImports.biome": true
     },
-    // "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[javascript]": {
         "editor.defaultFormatter": "biomejs.biome"
     },
@@ -24,8 +23,12 @@
         "editor.defaultFormatter": "biomejs.biome"
     },
     "[yaml]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.insertSpaces": true,
         "editor.tabSize": 2
+    },
+    "[svelte]": {
+        "editor.defaultFormatter": "svelte.svelte-vscode"
     },
     "cSpell.words": ["sveltecf", "uniproc", "ykyki"]
 }

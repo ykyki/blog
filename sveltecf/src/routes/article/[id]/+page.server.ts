@@ -8,7 +8,7 @@ export const load = (async ({ params }) => {
     const id = parseInt(params.id);
     const articles = await fetchAllArticles();
 
-    const article = articles.find((article, index) => index === id);
+    const article = articles.find((_, index) => index === id);
 
     if (article === undefined) {
         throw error(404, 'Not found');
