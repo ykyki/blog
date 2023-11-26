@@ -88,6 +88,8 @@ export interface IsParent extends IsNode {
     children: IsNode[];
 }
 
+// TODO
+// biome-ignore lint/suspicious/noEmptyInterface: <explanation>
 export interface IsLeaf extends IsNode {
     // children: never | undefined;
 }

@@ -16,20 +16,20 @@ describe('frontmatterのパース成功', () => {
         },
     ] satisfies { name: string; source: string }[];
 
-    tests.forEach(({ name, source }) => {
+    for (const { name, source } of tests) {
         test(name, () => {
             const parser = new ArticleParser(source);
 
             expect(parser.frontmatter).toBeDefined();
         });
-    });
+    }
 });
 
 describe('frontmatterのパース失敗', () => {
     const tests = [
         {
             name: '存在しない',
-            source: `with no frontmatter`,
+            source: 'with no frontmatter',
         },
         {
             name: '閉じていない',
@@ -39,21 +39,21 @@ date: 2021-01-01`,
         },
         {
             name: 'frontmatterの前に余分な改行がある',
-            source: 'Hello\n' + MINIMAL_FRONTMATTER,
+            source: `Hello\n${MINIMAL_FRONTMATTER}`,
         },
         {
             name: 'frontmatterの前に余分な文字列がある',
-            source: '\n' + MINIMAL_FRONTMATTER,
+            source: `\n${MINIMAL_FRONTMATTER}`,
         },
     ] satisfies { name: string; source: string }[];
 
-    tests.forEach(({ name, source }) => {
+    for (const { name, source } of tests) {
         test(name, () => {
             const parser = new ArticleParser(source);
 
             expect(() => parser.frontmatter).toThrow();
         });
-    });
+    }
 });
 
 describe('parse list', () => {
@@ -89,12 +89,12 @@ describe('parse list', () => {
             },
         ];
 
-        tests.forEach(({ name, source }) => {
+        for (const { name, source } of tests) {
             test(name, () => {
                 const parser = new ArticleParser(source);
 
                 expect(parser.root).toBeDefined();
             });
-        });
+        }
     });
 });

@@ -1,5 +1,5 @@
-import * as Schema from '@src/schema/Schema';
 import { ArticleParser } from '@src/article/parseWithMdAST';
+import * as Schema from '@src/schema/Schema';
 
 export default class ArticleEntity {
     private readonly parser: ArticleParser;

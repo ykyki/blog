@@ -1,4 +1,4 @@
-import { expect, test, describe } from 'bun:test';
+import { describe, expect, test } from 'bun:test';
 import path from 'node:path';
 import { loadAllArticleEntities, loadAllArticles } from '@src/loader';
 
@@ -14,7 +14,7 @@ describe('loadAllArticleEntities', () => {
     describe('各要素の読み込みに成功', async () => {
         const articles = await loadAllArticleEntities(contentPath);
 
-        articles.forEach((article) => {
+        for (const article of articles) {
             test(article.path, () => {
                 // TODO 明確なassertionを書く
                 expect(article.title).toBeTruthy();
@@ -22,7 +22,7 @@ describe('loadAllArticleEntities', () => {
                 expect(article.headings).toBeTruthy();
                 expect(article.root).toBeTruthy();
             });
-        });
+        }
     });
 });
 

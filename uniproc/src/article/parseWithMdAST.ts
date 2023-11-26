@@ -1,15 +1,15 @@
-import { unified } from 'unified';
-import remarkParse from 'remark-parse';
+import * as Schema from '@src/schema/Schema';
+import yaml from 'js-yaml';
+import * as mdAst from 'mdast';
+import * as mdAstMath from 'mdast-util-math';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
+import remarkParse from 'remark-parse';
+import { unified } from 'unified';
 import { is } from 'unist-util-is';
 import { visit } from 'unist-util-visit';
-import * as MdAST from 'mdast';
-import * as MdASTMath from 'mdast-util-math';
 import { z } from 'zod';
-import yaml from 'js-yaml';
-import * as Schema from '@src/schema/Schema';
 
 export class ArticleParser {
     readonly source: string;
@@ -18,7 +18,7 @@ export class ArticleParser {
         this.source = source;
     }
 
-    private get remarkTree(): MdAST.Root {
+    private get remarkTree(): mdAst.Root {
         return remarkProcessor().parse(this.source);
     }
 
@@ -35,7 +35,7 @@ export class ArticleParser {
     }
 
     get root(): Schema.Root {
-        return convertMdASTRoot(this.remarkTree);
+        return convertMdAstRoot(this.remarkTree);
     }
 }
 
@@ -52,7 +52,7 @@ const frontmatterSchema = z.object({
     tags: z.array(z.string()),
 });
 
-const extractFrontmatter = (tree: MdAST.Root): Schema.Frontmatter => {
+const extractFrontmatter = (tree: mdAst.Root): Schema.Frontmatter => {
     const node = tree.children[0];
     if (!is(node, 'yaml')) {
         throw new Error('Head node must be yaml');
@@ -66,23 +66,23 @@ const extractFrontmatter = (tree: MdAST.Root): Schema.Frontmatter => {
     return meta.data;
 };
 
-const convertMdASTRoot = (node: MdAST.Root): Schema.Root => {
+const convertMdAstRoot = (node: mdAst.Root): Schema.Root => {
     const children = node.children
         .filter((n) => !is(n, ['yaml']))
         .map((n) => {
             switch (n.type) {
                 case 'code':
-                    return convertMdASTCode(n);
+                    return convertMdAstCode(n);
                 case 'heading':
-                    return convertMdASTHeading(n);
+                    return convertMdAstHeading(n);
                 case 'paragraph':
-                    return convertMdASTParagraph(n);
+                    return convertMdAstParagraph(n);
                 case 'list':
-                    return convertMdASTList(n);
+                    return convertMdAstList(n);
                 case 'math':
-                    return convertMdASTMath(n as MdASTMath.Math);
-                case 'definition':
-                case 'footnoteDefinition':
+                    return convertMdAstMath(n as mdAstMath.Math);
+                // case "definition":
+                // case "footnoteDefinition":
                 default:
                     throw new Error(`Unsupported root children: ${n.type}`);
             }
@@ -94,15 +94,15 @@ const convertMdASTRoot = (node: MdAST.Root): Schema.Root => {
     } satisfies Schema.Root;
 };
 
-const convertMdASTHeading = (node: MdAST.Heading): Schema.Heading => {
+const convertMdAstHeading = (node: mdAst.Heading): Schema.Heading => {
     const children = node.children.map((n) => {
         switch (n.type) {
             case 'text':
-                return convertMdASTText(n);
-            case 'link':
-            case 'inlineCode':
-            case 'emphasis':
-            case 'strong':
+                return convertMdAstText(n);
+            // case "link":
+            // case "inlineCode":
+            // case "emphasis":
+            // case "strong":
             default:
                 throw new Error(`Unsupported heading children: ${n.type}`);
         }
@@ -115,21 +115,21 @@ const convertMdASTHeading = (node: MdAST.Heading): Schema.Heading => {
     } satisfies Schema.Heading;
 };
 
-const convertMdASTParagraph = (node: MdAST.Paragraph): Schema.Paragraph => {
+const convertMdAstParagraph = (node: mdAst.Paragraph): Schema.Paragraph => {
     const children = node.children.map((n) => {
         switch (n.type) {
             case 'text':
-                return convertMdASTText(n);
+                return convertMdAstText(n);
             case 'link':
-                return convertMdASTLink(n);
+                return convertMdAstLink(n);
             case 'inlineCode':
-                return convertMdASTInlineCode(n);
+                return convertMdAstInlineCode(n);
             case 'emphasis':
-                return convertMdASTEmphasis(n);
+                return convertMdAstEmphasis(n);
             case 'strong':
-                return convertMdASTStrong(n);
+                return convertMdAstStrong(n);
             case 'inlineMath':
-                return convertMdASTInlineMath(n);
+                return convertMdAstInlineMath(n);
             default:
                 throw new Error(`Unsupported paragraph children: ${n.type}`);
         }
@@ -141,12 +141,12 @@ const convertMdASTParagraph = (node: MdAST.Paragraph): Schema.Paragraph => {
     } satisfies Schema.Paragraph;
 };
 
-const convertMdASTList = (node: MdAST.List): Schema.List => {
+const convertMdAstList = (node: mdAst.List): Schema.List => {
     const ordered = node?.ordered ?? false;
 
     const children = [] as Schema.ListItem[];
     visit(node, 'listItem', (n) => {
-        children.push(covertMdASTListItem(n));
+        children.push(covertMdAstListItem(n));
     });
 
     return {
@@ -156,17 +156,17 @@ const convertMdASTList = (node: MdAST.List): Schema.List => {
     } satisfies Schema.List;
 };
 
-const covertMdASTListItem = (node: MdAST.ListItem): Schema.ListItem => {
+const covertMdAstListItem = (node: mdAst.ListItem): Schema.ListItem => {
     const children = node.children.flatMap((n): Schema.ListItem['children'] => {
         switch (n.type) {
             case 'list':
-                return [convertMdASTList(n)];
+                return [convertMdAstList(n)];
             case 'paragraph':
-                return convertMdASTParagraph(n).children;
+                return convertMdAstParagraph(n).children;
             case 'code':
-                return [convertMdASTCode(n)];
-            case 'definition':
-            case 'footnoteDefinition':
+                return [convertMdAstCode(n)];
+            // case "definition":
+            // case "footnoteDefinition":
             default:
                 throw new Error(`Unsupported list item children: ${n.type}`);
         }
@@ -178,7 +178,7 @@ const covertMdASTListItem = (node: MdAST.ListItem): Schema.ListItem => {
     } satisfies Schema.ListItem;
 };
 
-const convertMdASTCode = (node: MdAST.Code): Schema.Code => {
+const convertMdAstCode = (node: mdAst.Code): Schema.Code => {
     return {
         type: 'code',
         lang: node.lang ?? undefined,
@@ -186,14 +186,14 @@ const convertMdASTCode = (node: MdAST.Code): Schema.Code => {
     } satisfies Schema.Code;
 };
 
-const convertMdASTText = (node: MdAST.Text): Schema.Text => {
+const convertMdAstText = (node: mdAst.Text): Schema.Text => {
     return {
         type: 'text',
         value: node.value,
     } satisfies Schema.Text;
 };
 
-const convertMdASTLink = (node: MdAST.Link): Schema.Link => {
+const convertMdAstLink = (node: mdAst.Link): Schema.Link => {
     let text: string | undefined;
     if (node.children.length === 1 && is(node.children[0], 'text')) {
         text = node.children[0].value;
@@ -206,42 +206,42 @@ const convertMdASTLink = (node: MdAST.Link): Schema.Link => {
     } satisfies Schema.Link;
 };
 
-const convertMdASTInlineCode = (node: MdAST.InlineCode): Schema.InlineCode => {
+const convertMdAstInlineCode = (node: mdAst.InlineCode): Schema.InlineCode => {
     return {
         type: 'inlineCode',
         value: node.value,
     } satisfies Schema.InlineCode;
 };
 
-const convertMdASTEmphasis = (node: MdAST.Emphasis): Schema.Emphasis => {
+const convertMdAstEmphasis = (node: mdAst.Emphasis): Schema.Emphasis => {
     if (node.children.length === 1 && is(node.children[0], 'text')) {
         return {
             type: 'emphasis',
             value: node.children[0].value,
         } satisfies Schema.Emphasis;
     }
-    throw new Error('Ill-formed emphasis' + JSON.stringify(node));
+    throw new Error(`Ill-formed emphasis${JSON.stringify(node)}`);
 };
 
-const convertMdASTStrong = (node: MdAST.Strong): Schema.Strong => {
+const convertMdAstStrong = (node: mdAst.Strong): Schema.Strong => {
     if (node.children.length === 1 && is(node.children[0], 'text')) {
         return {
             type: 'strong',
             value: node.children[0].value,
         } satisfies Schema.Strong;
     }
-    throw new Error('Ill-formed strong' + JSON.stringify(node));
+    throw new Error(`Ill-formed strong${JSON.stringify(node)}`);
 };
 
-const convertMdASTMath = (node: MdASTMath.Math): Schema.DisplayMath => {
+const convertMdAstMath = (node: mdAstMath.Math): Schema.DisplayMath => {
     return {
         type: 'displayMath',
         value: node.value,
     } satisfies Schema.DisplayMath;
 };
 
-const convertMdASTInlineMath = (
-    node: MdASTMath.InlineMath,
+const convertMdAstInlineMath = (
+    node: mdAstMath.InlineMath,
 ): Schema.InlineMath => {
     return {
         type: 'inlineMath',

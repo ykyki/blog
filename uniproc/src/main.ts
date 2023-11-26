@@ -13,3 +13,6 @@ article.root.children
     .forEach((c, i) => {
         console.log('index', i, 'component', c);
     });
+// for (const [i, c] of article.root.children.filter((c) => c.type === 'heading').entries()) {
+//         console.log('index', i, 'component', c);
+// }
