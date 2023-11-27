@@ -30,5 +30,5 @@
     "[svelte]": {
         "editor.defaultFormatter": "svelte.svelte-vscode"
     },
-    "cSpell.words": ["sveltecf", "uniproc", "ykyki"]
+    "cSpell.words": ["katex", "sveltecf", "uniproc", "ykyki"]
 }

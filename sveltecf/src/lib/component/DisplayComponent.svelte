@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { Schema } from 'uniproc';
-    import InlineComponent from './InlineComponent.svelte';
+    import InlineComponent from '$lib/component/InlineComponent.svelte';
+    import MathExpr from '$lib/component/MathExpr.svelte';
 
     export let component: Schema.DisplayComponent | Schema.Heading;
 </script>
@@ -53,6 +54,6 @@
     <pre>
         <code>{component.value}</code>
     </pre>
-{:else}
-    <div>Unknown Display Component Type: {component.type}</div>
+{:else if component.type === 'displayMath'}
+    <MathExpr expr={component.value} mode={'display'} />
 {/if}

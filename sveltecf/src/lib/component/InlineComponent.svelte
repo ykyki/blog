@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { Schema } from 'uniproc';
+    import MathExpr from '$lib/component/MathExpr.svelte';
     export let component: Schema.InlineComponent | Schema.Heading;
 </script>
 
@@ -14,6 +15,7 @@
 {:else if component.type === 'inlineCode'}<code>{component.value}</code>
 {:else if component.type === 'emphasis'}<b>{component.value}</b>
 {:else if component.type === 'strong'}<strong>{component.value}</strong>
-{:else}
-    <span>Unknown Component Type: {component.type}</span>
+{:else if component.type === 'inlineMath'}<MathExpr
+        expr={component.value}
+        mode={'inline'} />
 {/if}

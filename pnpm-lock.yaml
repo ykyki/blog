@@ -28,6 +28,10 @@ importers:
         version: 2.8.8
 
   sveltecf:
+    dependencies:
+      katex:
+        specifier: ^0.16.9
+        version: 0.16.9
     devDependencies:
       '@playwright/test':
         specifier: ^1.40.0
@@ -41,6 +45,9 @@ importers:
       '@sveltejs/kit':
         specifier: ^1.27.6
         version: 1.27.6(svelte@4.2.7)(vite@4.5.0)
+      '@types/katex':
+        specifier: ^0.16.7
+        version: 0.16.7
       eslint-plugin-svelte:
         specifier: ^2.35.1
         version: 2.35.1(eslint@8.54.0)(svelte@4.2.7)
@@ -934,7 +941,6 @@ packages:
 
   /@types/katex@0.16.7:
     resolution: {integrity: sha512-HMwFiRujE5PjrgwHQ25+bsLJgowjGjm5Z8FVSf0N6PwgJrwxH0QxzHYDcKsTfV3wva0vzrpqMTJS2jXPr5BMEQ==}
-    dev: false
 
   /@types/mdast@4.0.3:
     resolution: {integrity: sha512-LsjtqsyF+d2/yFOYaN22dHZI1Cpwkrj+g06G8+qtUKlhovPW89YhqSnfKtMbkgmEtYpH2gydRNULd6y8mciAFg==}
