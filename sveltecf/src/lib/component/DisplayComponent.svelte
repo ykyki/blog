@@ -21,39 +21,21 @@
                 component={child} />{/each}
     </p>
 {:else if component.type === 'list'}
-    {#if component.ordered}
-        <ol>
-            {#each component.children as child}
-                <li>
-                    {#each child.children as grandChild}
-                        {#if grandChild.type === 'list' || grandChild.type === 'code'}
-                            <svelte:self component={grandChild} />
-                        {:else}
-                            <InlineComponent component={grandChild} />
-                        {/if}
-                    {/each}
-                </li>
-            {/each}
-        </ol>
-    {:else}
-        <ul>
-            {#each component.children as child}
-                <li>
-                    {#each child.children as grandChild}
-                        {#if grandChild.type === 'list' || grandChild.type === 'code'}
-                            <svelte:self component={grandChild} />
-                        {:else}
-                            <InlineComponent component={grandChild} />
-                        {/if}
-                    {/each}
-                </li>
-            {/each}
-        </ul>
-    {/if}
+    <svelte:element this={component.ordered ? 'ol' : 'ul'}>
+        {#each component.children as child}
+            <li>
+                {#each child.children as grandChild}
+                    {#if grandChild.type === 'list' || grandChild.type === 'code'}
+                        <svelte:self component={grandChild} />
+                    {:else}
+                        <InlineComponent component={grandChild} />
+                    {/if}
+                {/each}
+            </li>
+        {/each}
+    </svelte:element>
 {:else if component.type === 'code'}
-    <pre>
-        <code>{component.value}</code>
-    </pre>
+    <pre><code>{component.value}</code></pre>
 {:else if component.type === 'displayMath'}
     <MathExpr expr={component.value} mode={'display'} />
 {/if}
