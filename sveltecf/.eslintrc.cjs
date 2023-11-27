@@ -26,6 +26,19 @@ module.exports = {
             parserOptions: {
                 parser: '@typescript-eslint/parser',
             },
+            rules: {
+                'no-restricted-imports': [
+                    'error',
+                    {
+                        patterns: [
+                            {
+                                group: ['./**', '**..', '!./$**'],
+                                message: 'Relative imports are not allowed.',
+                            },
+                        ],
+                    },
+                ],
+            },
         },
     ],
 };
