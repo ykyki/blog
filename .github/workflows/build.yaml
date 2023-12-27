@@ -57,3 +57,6 @@ jobs:
 
   build-uniproc-2:
     uses: ./.github/workflows/build-uniproc.yaml
+
+  build-sveltecf-2:
+    uses: ./.github/workflows/build-sveltecf.yaml

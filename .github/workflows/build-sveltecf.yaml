@@ -6,16 +6,21 @@ on:
 env:
   NODE_VERSION: '20'
   PNPM_VERSION: '8'
-  BUN_VERSION: '1'
 
 jobs:
   install-pnpm-deps:
     uses: ./.github/workflows/install-pnpm-deps.yaml
 
-  build:
+  build-uniproc:
     needs: install-pnpm-deps
+    uses: ./.github/workflows/build-uniproc.yaml
+
+  build:
+    needs:
+      - install-pnpm-deps
+      - build-uniproc
     runs-on: ubuntu-latest
-    timeout-minutes: 1
+    timeout-minutes: 3
     env:
       STORE_PATH: ''
     steps:
@@ -29,18 +34,21 @@ jobs:
           run_install: false
       - name: Get pnpm store directory
         run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-      - uses: actions/cache/restore@v3
+      - name: Restore pnpm-store cache
+        uses: actions/cache/restore@v3
         with:
           path: ${{ env.STORE_PATH}}
           key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: ${{ env.BUN_VERSION }}
-      - name: Install at uniproc
-        run: pnpm install
-        working-directory: ./uniproc
-      - run: pnpm uniproc build
-      - uses: actions/cache/save@v3
+      - name: Restore uniproc-dist cache
+        uses: actions/cache/restore@v3
         with:
           path: ./uniproc/dist
           key: uniproc-dist-${{ github.sha }}
+      - name: Install at sveltecf
+        run: pnpm install
+        working-directory: ./sveltecf
+      - run: pnpm sveltecf build
+      - name: Install playwright
+        run: pnpm sveltecf exec playwright install --with-deps
+      - name: Test
+        run: pnpm sveltecf run test
