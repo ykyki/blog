@@ -38,7 +38,8 @@ jobs:
         run: pnpm install
         working-directory: ./sveltecf
       - run: pnpm sveltecf build
-      - uses: actions/cache/save@v3
+      - name: Save sveltecf-kit cache
+        uses: actions/cache/save@v3
         with:
           path: ./sveltecf/.svelte-kit
           key: sveltecf-kit-${{ github.sha }}

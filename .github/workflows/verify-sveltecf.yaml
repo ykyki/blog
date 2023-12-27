@@ -10,7 +10,7 @@ env:
 jobs:
   test-and-so-on:
     runs-on: ubuntu-latest
-    timeout-minutes: 1
+    timeout-minutes: 2
     env:
       STORE_PATH: ''
     steps:
@@ -42,9 +42,8 @@ jobs:
       - name: Install at sveltecf
         run: pnpm install
         working-directory: ./sveltecf
-      - run: pnpm sveltecf test
-      - run: pnpm sveltecf run lint
-      - run: pnpm sveltecf run check
+      - run: pnpm sveltecf lint
+      - run: pnpm sveltecf check
       - name: Install playwright
         run: pnpm sveltecf exec playwright install --with-deps
-      - run: pnpm sveltecf run test
+      - run: pnpm sveltecf test

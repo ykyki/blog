@@ -23,20 +23,22 @@ jobs:
         with:
           version: ${{ env.PNPM_VERSION }}
           run_install: false
-      - name: Get pnpm store directory
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-      - uses: actions/cache/restore@v3
-        with:
-          path: ${{ env.STORE_PATH}}
-          key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: ${{ env.BUN_VERSION }}
+      - name: Get pnpm store directory
+        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - name: Restore pnpm-store cache
+        uses: actions/cache/restore@v3
+        with:
+          path: ${{ env.STORE_PATH}}
+          key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
       - name: Install at uniproc
         run: pnpm install
         working-directory: ./uniproc
       - run: pnpm uniproc build
-      - uses: actions/cache/save@v3
+      - name: Save uniproc-dist cache
+        uses: actions/cache/save@v3
         with:
           path: ./uniproc/dist
           key: uniproc-dist-${{ github.sha }}

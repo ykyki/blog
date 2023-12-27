@@ -31,7 +31,8 @@ jobs:
           key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
       - run: pnpm install
         if: steps.restore-cache.outputs.cache-hit != 'true'
-      - uses: actions/cache/save@v3
+      - name: Save pnpm-store cache
+        uses: actions/cache/save@v3
         if: steps.restore-cache.outputs.cache-hit != 'true'
         with:
           path: ${{ env.STORE_PATH }}
