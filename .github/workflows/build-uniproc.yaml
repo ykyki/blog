@@ -33,11 +33,11 @@ jobs:
         id: restore-cache
         with:
           path: ${{ env.STORE_PATH}}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: ${{ env.BUN_VERSION }}
-      - name: Install for uniproc
+      - name: Install at uniproc
         run: pnpm install
         working-directory: ./uniproc
       - run: pnpm uniproc build
@@ -45,4 +45,4 @@ jobs:
       - uses: actions/cache/save@v3
         with:
           path: ./uniproc/dist
-          key: ${{ runner.os }}-uniproc-dist-${{ github.sha }}
+          key: uniproc-dist-${{ github.sha }}

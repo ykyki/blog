@@ -28,10 +28,11 @@ jobs:
         id: restore-cache
         with:
           path: ${{ env.STORE_PATH}}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
       - run: pnpm install
         if: steps.restore-cache.outputs.cache-hit != 'true'
       - uses: actions/cache/save@v3
+        if: steps.restore-cache.outputs.cache-hit != 'true'
         with:
           path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
