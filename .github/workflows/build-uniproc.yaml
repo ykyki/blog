@@ -37,6 +37,9 @@ jobs:
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: ${{ env.BUN_VERSION }}
+      - name: Install for uniproc
+        run: pnpm install
+        working-directory: ./uniproc
       - run: pnpm uniproc build
       - run: pnpm uniproc test
       - uses: actions/cache/save@v3
