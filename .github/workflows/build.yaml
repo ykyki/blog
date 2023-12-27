@@ -4,31 +4,6 @@ on:
   push:
 
 jobs:
-  # build-uniproc:
-  #   name: Build uniproc
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 3
-  #   defaults:
-  #     run:
-  #       working-directory: ./uniproc
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         node-version: '20'
-  #     - uses: pnpm/action-setup@v2
-  #       with:
-  #         version: '8'
-  #     - uses: oven-sh/setup-bun@v1
-  #     - name: Install dependencies
-  #       run: pnpm install --prefer-frozen-lockfile
-  #     - name: Build
-  #       run: pnpm run build
-  #     - name: test
-  #       run: pnpm run test
-  #     - name: Run main
-  #       run: pnpm run main
-
   install-pnpm-deps:
     uses: ./.github/workflows/install-pnpm-deps.yaml
 
@@ -49,3 +24,17 @@ jobs:
   verify-sveltecf:
     needs: build-sveltecf
     uses: ./.github/workflows/verify-sveltecf.yaml
+
+  upload-sveltecf:
+    needs: build-sveltecf
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - uses: actions/cache/restore@v3
+        with:
+          path: ./sveltecf/.svelte-kit
+          key: sveltecf-kit-${{ github.sha }}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: svsltecf-cloudflare-${{ github.sha }}
+          path: ./sveltecf/.svelte-kit/cloudflare

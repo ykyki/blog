@@ -40,5 +40,5 @@ jobs:
       - run: pnpm sveltecf build
       - uses: actions/cache/save@v3
         with:
-          path: ./sveltecf/.svelte-kit/cloudflare
-          key: sveltecf-output-${{ github.sha }}
+          path: ./sveltecf/.svelte-kit
+          key: sveltecf-kit-${{ github.sha }}

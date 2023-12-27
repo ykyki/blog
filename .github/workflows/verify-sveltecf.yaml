@@ -31,6 +31,11 @@ jobs:
       - name: Install at sveltecf
         run: pnpm install
         working-directory: ./sveltecf
+      - name: Restore sveletecf cache
+        uses: actions/cache/restore@v3
+        with:
+          path: ./sveltecf/.svelte-kit
+          key: sveltecf-kit-${{ github.sha }}
       - run: pnpm sveltecf test
       - run: pnpm sveltecf run lint
       - run: pnpm sveltecf run check
