@@ -22,7 +22,7 @@
     "[jsonc]": {
         "editor.defaultFormatter": "biomejs.biome"
     },
-    "[yaml]": {
+    "[github-actions-workflow]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.insertSpaces": true,
         "editor.tabSize": 2
