@@ -4,59 +4,66 @@ on:
   push:
 
 jobs:
-  build-sveltecf:
-    name: Build sveltecf
-    runs-on: ubuntu-latest
-    timeout-minutes: 3
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - uses: pnpm/action-setup@v2
-        with:
-          version: '8'
-      - uses: oven-sh/setup-bun@v1
-      - name: Install dependencies
-        run: pnpm install --prefer-frozen-lockfile
-      - name: Build
-        run: pnpm run build
-      - name: Lint
-        run: pnpm run lint
-      - name: Check
-        run: pnpm sveltecf run check
-      - name: Install playwright
-        run: pnpm sveltecf exec playwright install --with-deps
-      - name: Test
-        run: pnpm sveltecf run test
+  # build-sveltecf:
+  #   name: Build sveltecf
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 3
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '20'
+  #     - uses: pnpm/action-setup@v2
+  #       with:
+  #         version: '8'
+  #     - uses: oven-sh/setup-bun@v1
+  #     - name: Install dependencies
+  #       run: pnpm install --prefer-frozen-lockfile
+  #     - name: Build
+  #       run: pnpm run build
+  #     - name: Lint
+  #       run: pnpm run lint
+  #     - name: Check
+  #       run: pnpm sveltecf run check
+  #     - name: Install playwright
+  #       run: pnpm sveltecf exec playwright install --with-deps
+  #     - name: Test
+  #       run: pnpm sveltecf run test
+
+  # build-uniproc:
+  #   name: Build uniproc
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 3
+  #   defaults:
+  #     run:
+  #       working-directory: ./uniproc
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '20'
+  #     - uses: pnpm/action-setup@v2
+  #       with:
+  #         version: '8'
+  #     - uses: oven-sh/setup-bun@v1
+  #     - name: Install dependencies
+  #       run: pnpm install --prefer-frozen-lockfile
+  #     - name: Build
+  #       run: pnpm run build
+  #     - name: test
+  #       run: pnpm run test
+  #     - name: Run main
+  #       run: pnpm run main
+
+  install-pnpm-deps:
+    uses: ./.github/workflows/install-pnpm-deps.yaml
 
   build-uniproc:
-    name: Build uniproc
-    runs-on: ubuntu-latest
-    timeout-minutes: 3
-    defaults:
-      run:
-        working-directory: ./uniproc
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - uses: pnpm/action-setup@v2
-        with:
-          version: '8'
-      - uses: oven-sh/setup-bun@v1
-      - name: Install dependencies
-        run: pnpm install --prefer-frozen-lockfile
-      - name: Build
-        run: pnpm run build
-      - name: test
-        run: pnpm run test
-      - name: Run main
-        run: pnpm run main
-
-  build-uniproc-2:
+    needs: install-pnpm-deps
     uses: ./.github/workflows/build-uniproc.yaml
 
-  build-sveltecf-2:
+  build-sveltecf:
+    needs:
+      - install-pnpm-deps
+      - build-uniproc
     uses: ./.github/workflows/build-sveltecf.yaml

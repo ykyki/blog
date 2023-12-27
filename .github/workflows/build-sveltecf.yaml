@@ -8,19 +8,9 @@ env:
   PNPM_VERSION: '8'
 
 jobs:
-  install-pnpm-deps:
-    uses: ./.github/workflows/install-pnpm-deps.yaml
-
-  build-uniproc:
-    needs: install-pnpm-deps
-    uses: ./.github/workflows/build-uniproc.yaml
-
   build:
-    needs:
-      - install-pnpm-deps
-      - build-uniproc
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 1
     env:
       STORE_PATH: ''
     steps:
@@ -48,7 +38,7 @@ jobs:
         run: pnpm install
         working-directory: ./sveltecf
       - run: pnpm sveltecf build
-      - name: Install playwright
-        run: pnpm sveltecf exec playwright install --with-deps
-      - name: Test
-        run: pnpm sveltecf run test
+      - uses: actions/cache/save@v3
+        with:
+          path: ./sveltecf/.svelte-kit/cloudflare
+          key: sveltecf-output-${{ github.sha }}

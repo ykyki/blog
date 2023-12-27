@@ -9,11 +9,7 @@ env:
   BUN_VERSION: '1'
 
 jobs:
-  install-pnpm-deps:
-    uses: ./.github/workflows/install-pnpm-deps.yaml
-
   build:
-    needs: install-pnpm-deps
     runs-on: ubuntu-latest
     timeout-minutes: 1
     env:

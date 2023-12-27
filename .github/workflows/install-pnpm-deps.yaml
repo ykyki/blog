@@ -1,4 +1,4 @@
-name: install-pnpm
+name: install-pnpm-deps
 
 on:
   workflow_call:
