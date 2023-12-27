@@ -4,32 +4,6 @@ on:
   push:
 
 jobs:
-  # build-sveltecf:
-  #   name: Build sveltecf
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 3
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         node-version: '20'
-  #     - uses: pnpm/action-setup@v2
-  #       with:
-  #         version: '8'
-  #     - uses: oven-sh/setup-bun@v1
-  #     - name: Install dependencies
-  #       run: pnpm install --prefer-frozen-lockfile
-  #     - name: Build
-  #       run: pnpm run build
-  #     - name: Lint
-  #       run: pnpm run lint
-  #     - name: Check
-  #       run: pnpm sveltecf run check
-  #     - name: Install playwright
-  #       run: pnpm sveltecf exec playwright install --with-deps
-  #     - name: Test
-  #       run: pnpm sveltecf run test
-
   # build-uniproc:
   #   name: Build uniproc
   #   runs-on: ubuntu-latest
@@ -67,3 +41,11 @@ jobs:
       - install-pnpm-deps
       - build-uniproc
     uses: ./.github/workflows/build-sveltecf.yaml
+
+  verify-uniproc:
+    needs: build-uniproc
+    uses: ./.github/workflows/verify-uniproc.yaml
+
+  verify-sveltecf:
+    needs: build-sveltecf
+    uses: ./.github/workflows/verify-sveltecf.yaml
