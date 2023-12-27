@@ -1,0 +1,37 @@
+name: install-pnpm
+
+on:
+  workflow_call:
+
+env:
+  NODE_VERSION: '20'
+  PNPM_VERSION: '8'
+
+jobs:
+  cache-and-install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    env:
+      STORE_PATH: ''
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+          run_install: false
+      - name: Get pnpm store directory
+        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - uses: actions/cache/restore@v3
+        id: restore-cache
+        with:
+          path: ${{ env.STORE_PATH}}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - run: pnpm install
+        if: steps.restore-cache.outputs.cache-hit != 'true'
+      - uses: actions/cache/save@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
