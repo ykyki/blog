@@ -8,6 +8,7 @@
 </script>
 
 <h1>blog.ykyki.net</h1>
+<p><b>🚧under construction🚧</b></p>
 <p>rendered at {date}</p>
 
 <hr />
