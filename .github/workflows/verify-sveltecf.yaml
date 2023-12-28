@@ -3,32 +3,16 @@ name: verify-sveltecf
 on:
   workflow_call:
 
-env:
-  NODE_VERSION: '20'
-  PNPM_VERSION: '8'
-
 jobs:
   test-and-so-on:
     runs-on: ubuntu-latest
-    timeout-minutes: 2
-    env:
-      STORE_PATH: ''
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - uses: ./.github/actions/common-setup
         with:
-          node-version: ${{ env.NODE_VERSION }}
-      - uses: pnpm/action-setup@v2
-        with:
-          version: ${{ env.PNPM_VERSION }}
-          run_install: false
-      - name: Get pnpm store directory
-        run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-      - name: Restore pnpm-store cache
-        uses: actions/cache/restore@v3
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          REQUIRE_BUN: 'false'
+      - uses: ./.github/actions/restore-pnpm-store-cache
       - name: Restore uniproc-dist cache
         uses: actions/cache/restore@v3
         with:

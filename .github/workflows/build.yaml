@@ -30,7 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 1
     steps:
-      - uses: actions/cache/restore@v3
+      - name: Restore sveletecf cache
+        uses: actions/cache/restore@v3
         with:
           path: ./sveltecf/.svelte-kit
           key: sveltecf-kit-${{ github.sha }}

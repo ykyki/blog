@@ -13,10 +13,10 @@ runs:
   steps:
     - name: Get pnpm store directory
       shell: bash
-      run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
     - name: Restore pnpm-store cache
       id: restore-pnpm-store-cache
       uses: actions/cache/restore@v3
       with:
-        path: ${{ env.STORE_PATH }}
+        path: ${{ env.PNPM_STORE_PATH }}
         key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}

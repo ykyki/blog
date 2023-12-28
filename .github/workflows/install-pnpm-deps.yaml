@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 1
     env:
-      STORE_PATH: ''
+      PNPM_STORE_PATH: ''
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/common-setup
@@ -18,9 +18,11 @@ jobs:
         id: restore-pnpm-store-cache
       - run: pnpm install
         if: steps.restore-pnpm-store-cache.outputs.cache-hit != 'true'
+      - name: Get pnpm store directory
+        run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
       - name: Save pnpm-store cache
         uses: actions/cache/save@v3
         if: steps.restore-pnpm-store-cache.outputs.cache-hit != 'true'
         with:
-          path: ${{ env.STORE_PATH }}
+          path: ${{ env.PNPM_STORE_PATH }}
           key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
