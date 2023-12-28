@@ -1,0 +1,15 @@
+name: restore-pnpm-store-cache
+inputs:
+
+runs:
+  using: 'composite'
+  env:
+    STORE_PATH: ''
+  steps:
+    - name: Get pnpm store directory
+      run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+    - name: Restore pnpm-store cache
+      uses: actions/cache/restore@v3
+      with:
+        path: ${{ env.STORE_PATH }}
+        key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}

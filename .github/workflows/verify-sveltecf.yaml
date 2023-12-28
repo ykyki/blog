@@ -27,7 +27,7 @@ jobs:
       - name: Restore pnpm-store cache
         uses: actions/cache/restore@v3
         with:
-          path: ${{ env.STORE_PATH}}
+          path: ${{ env.STORE_PATH }}
           key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
       - name: Restore uniproc-dist cache
         uses: actions/cache/restore@v3
