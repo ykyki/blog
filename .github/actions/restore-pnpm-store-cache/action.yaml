@@ -1,12 +1,13 @@
 name: restore-pnpm-store-cache
-inputs:
+description: |
+  restore pnpm store cache
+  requires pnpm setup
 
 runs:
   using: 'composite'
-  env:
-    STORE_PATH: ''
   steps:
     - name: Get pnpm store directory
+      shell: bash
       run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
     - name: Restore pnpm-store cache
       uses: actions/cache/restore@v3
