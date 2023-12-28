@@ -4,7 +4,7 @@ on:
   workflow_call:
 
 jobs:
-  test-and-so-on:
+  test:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
@@ -26,8 +26,31 @@ jobs:
       - name: Install at sveltecf
         run: pnpm install
         working-directory: ./sveltecf
-      - run: pnpm sveltecf lint
-      - run: pnpm sveltecf check
       - name: Install playwright
         run: pnpm sveltecf exec playwright install --with-deps
       - run: pnpm sveltecf test
+
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/common-setup
+        with:
+          REQUIRE_BUN: 'false'
+      - uses: ./.github/actions/restore-pnpm-store-cache
+      - name: Restore uniproc-dist cache
+        uses: actions/cache/restore@v3
+        with:
+          path: ./uniproc/dist
+          key: uniproc-dist-${{ github.sha }}
+      - name: Restore sveletecf cache
+        uses: actions/cache/restore@v3
+        with:
+          path: ./sveltecf/.svelte-kit
+          key: sveltecf-kit-${{ github.sha }}
+      - name: Install at sveltecf
+        run: pnpm install
+        working-directory: ./sveltecf
+      - run: pnpm sveltecf lint
+      - run: pnpm sveltecf check

@@ -4,7 +4,19 @@ on:
   workflow_call:
 
 jobs:
-  test-and-so-on:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/common-setup
+      - uses: ./.github/actions/restore-pnpm-store-cache
+      - name: Install at uniproc
+        run: pnpm install
+        working-directory: ./uniproc
+      - run: pnpm uniproc test
+
+  lint:
     runs-on: ubuntu-latest
     timeout-minutes: 1
     steps:
@@ -15,5 +27,15 @@ jobs:
         run: pnpm install
         working-directory: ./uniproc
       - run: pnpm uniproc lint
-      - run: pnpm uniproc test
+
+  run-main:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/common-setup
+      - uses: ./.github/actions/restore-pnpm-store-cache
+      - name: Install at uniproc
+        run: pnpm install
+        working-directory: ./uniproc
       - run: pnpm uniproc main
