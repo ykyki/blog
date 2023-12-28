@@ -3,27 +3,13 @@ name: build-uniproc
 on:
   workflow_call:
 
-env:
-  NODE_VERSION: '20'
-  PNPM_VERSION: '8'
-  BUN_VERSION: '1'
-
 jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 1
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - uses: pnpm/action-setup@v2
-        with:
-          version: ${{ env.PNPM_VERSION }}
-          run_install: false
-      - uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: ${{ env.BUN_VERSION }}
+      - uses: ./.github/actions/common-setup
       - uses: ./.github/actions/restore-pnpm-store-cache
       - name: Install at uniproc
         run: pnpm install

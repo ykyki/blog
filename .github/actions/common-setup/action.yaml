@@ -1,0 +1,36 @@
+name: common-setup
+description: |
+  action for common setup of node/pnpm/bun
+
+inputs:
+  NODE_VERSION:
+    description: ''
+    required: false
+    default: '20'
+  PNPM_VERSION:
+    description: ''
+    required: false
+    default: '8'
+  BUN_VERSION:
+    description: ''
+    required: false
+    default: '1'
+  REQUIRE_BUN:
+    description: ''
+    required: false
+    default: 'true'
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.NODE_VERSION }}
+    - uses: pnpm/action-setup@v2
+      with:
+        version: ${{ inputs.PNPM_VERSION }}
+        run_install: false
+    - uses: oven-sh/setup-bun@v1
+      if: inputs.REQUIRE_BUN == 'true'
+      with:
+        bun-version: ${{ inputs.BUN_VERSION }}
