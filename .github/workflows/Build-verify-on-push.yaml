@@ -1,7 +1,6 @@
-name: Build🔨
+name: Build🔨, Verify🧪 on push
 
-on:
-  push:
+on: push
 
 jobs:
   install-pnpm-deps:
@@ -24,18 +23,3 @@ jobs:
   verify-sveltecf:
     needs: build-sveltecf
     uses: ./.github/workflows/verify-sveltecf.yaml
-
-  upload-sveltecf:
-    needs: build-sveltecf
-    runs-on: ubuntu-latest
-    timeout-minutes: 1
-    steps:
-      - name: Restore sveletecf cache
-        uses: actions/cache/restore@v3
-        with:
-          path: ./sveltecf/.svelte-kit
-          key: sveltecf-kit-${{ github.sha }}
-      - uses: actions/upload-artifact@v3
-        with:
-          name: svsltecf-cloudflare-${{ github.sha }}
-          path: ./sveltecf/.svelte-kit/cloudflare

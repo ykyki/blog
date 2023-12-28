@@ -1,0 +1,43 @@
+name: Build🔨, Verify🧪, Upload🚢
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 6'
+
+jobs:
+  install-pnpm-deps:
+    uses: ./.github/workflows/install-pnpm-deps.yaml
+
+  build-uniproc:
+    needs: install-pnpm-deps
+    uses: ./.github/workflows/build-uniproc.yaml
+
+  build-sveltecf:
+    needs:
+      - install-pnpm-deps
+      - build-uniproc
+    uses: ./.github/workflows/build-sveltecf.yaml
+
+  verify-uniproc:
+    needs: build-uniproc
+    uses: ./.github/workflows/verify-uniproc.yaml
+
+  verify-sveltecf:
+    needs: build-sveltecf
+    uses: ./.github/workflows/verify-sveltecf.yaml
+
+  upload-sveltecf:
+    needs: build-sveltecf
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Restore sveletecf cache
+        uses: actions/cache/restore@v3
+        with:
+          path: ./sveltecf/.svelte-kit
+          key: sveltecf-kit-${{ github.sha }}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: svsltecf-cloudflare-${{ github.sha }}
+          path: ./sveltecf/.svelte-kit/cloudflare
