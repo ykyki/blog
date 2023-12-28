@@ -3,6 +3,11 @@ description: |
   restore pnpm store cache
   requires pnpm setup
 
+outputs:
+  cache-hit:
+    description: ''
+    value: ${{ steps.restore-pnpm-store-cache.outputs.cache-hit }}
+
 runs:
   using: 'composite'
   steps:
@@ -10,6 +15,7 @@ runs:
       shell: bash
       run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
     - name: Restore pnpm-store cache
+      id: restore-pnpm-store-cache
       uses: actions/cache/restore@v3
       with:
         path: ${{ env.STORE_PATH }}
