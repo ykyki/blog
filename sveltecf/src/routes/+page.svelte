@@ -16,7 +16,7 @@
 <h2>Articles</h2>
 <div>
     {#each articles as article, index}
-        {@const titleLink = `/article/${index}`}
+        {@const titleLink = `/article/${article.frontmatter.slug}`}
         <Article {titleLink} {article} />
         <hr />
     {/each}

@@ -4,8 +4,8 @@
 
     export let data: PageData;
 
-    const { id, article } = data;
-    const titleLink = `/article/${id}`;
+    const { slug, article } = data;
+    const titleLink = `/article/${slug}`;
 </script>
 
 <svelte:head>

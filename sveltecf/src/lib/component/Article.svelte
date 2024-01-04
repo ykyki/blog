@@ -13,15 +13,16 @@
 </h1>
 
 <div>
-    <dvi>date: {article.frontmatter.date.toString()}</dvi>
-    <div>
-        tags: <ul>
-            {#each article.frontmatter.tags as tag}<li>{tag}</li>{/each}
-        </ul>
-    </div>
-</div>
+    <ul>
+        <li>created: {article.frontmatter.createdAt.toString()}</li>
+        <li>updated: {article.frontmatter.updatedAt.toString()}</li>
+    </ul>
 
-<div>
+    tags:
+    <ul>
+        {#each article.frontmatter.tags as tag}<li>{tag}</li>{/each}
+    </ul>
+
     Table of Contents:
     <ul>
         {#each article.headings as heading}
