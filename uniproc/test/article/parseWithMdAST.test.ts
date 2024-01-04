@@ -1,9 +1,16 @@
 import { describe, expect, test } from 'bun:test';
 import { ArticleParser } from '@src/article/parseWithMdAST';
 
-const MINIMAL_FRONTMATTER = `---
-title: ""
-date: "2020-02-03"
+const MINIMAL_FRONTMATTER = ({
+    title = 'The title',
+    slug = 'minimal-frontmatter',
+    createdAt = '2020-02-03',
+    updatedAt = '2020-02-03',
+}) => `---
+title: "${title}"
+slug: "${slug}"
+createdAt: "${createdAt}"
+updatedAt: "${updatedAt}"
 tags: []
 ---
 `;
@@ -12,7 +19,7 @@ describe('frontmatterのパース成功', () => {
     const tests = [
         {
             name: '最小構成',
-            source: MINIMAL_FRONTMATTER,
+            source: MINIMAL_FRONTMATTER({}),
         },
     ] satisfies { name: string; source: string }[];
 
@@ -38,12 +45,20 @@ title: "The title"
 date: 2021-01-01`,
         },
         {
-            name: 'frontmatterの前に余分な改行がある',
-            source: `Hello\n${MINIMAL_FRONTMATTER}`,
+            name: 'frontmatterの前に余分な文字列がある',
+            source: `Hello${MINIMAL_FRONTMATTER}`,
         },
         {
-            name: 'frontmatterの前に余分な文字列がある',
+            name: 'frontmatterの前に余分な改行がある',
             source: `\n${MINIMAL_FRONTMATTER}`,
+        },
+        {
+            name: 'slugが空文字列',
+            source: MINIMAL_FRONTMATTER({ slug: '' }),
+        },
+        {
+            name: 'slugが大文字を含む',
+            source: MINIMAL_FRONTMATTER({ slug: 'Hello-World' }),
         },
     ] satisfies { name: string; source: string }[];
 

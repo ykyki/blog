@@ -51,7 +51,7 @@ const frontmatterSchema = z.object({
     createdAt: z.coerce.date(),
     updatedAt: z.coerce.date(),
     tags: z.array(z.string()),
-    slug: z.string().regex(/^[a-z0-9_-]+$/i),
+    slug: z.string().regex(/^[a-z0-9_-]+$/),
     draft: z.boolean().default(true),
 });
 
