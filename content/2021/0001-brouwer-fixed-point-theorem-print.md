@@ -18,4 +18,4 @@ keywords:
 
 ## PDF
 
-{< pdf title="Brouwer の不動点定理とその周辺">}
+[Brouwer の不動点定理とその周辺](https://bucket.ykyki.net/p1/190510_Brouwer-s-fixed-point-theorem-and-related-topics.pdf)
