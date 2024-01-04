@@ -14,7 +14,11 @@ export const fetchAllArticles = async (): Promise<Schema.Article[]> => {
         return cache.articles;
     }
 
-    const articles = await loadAllArticles(contentPath);
+    const articles = (await loadAllArticles(contentPath))
+        // .filter((a) => a.frontmatter.draft === false)
+        .sort((a, b) =>
+            a.frontmatter.createdAt > b.frontmatter.createdAt ? 1 : -1,
+        );
 
     cache.articles = articles;
     return cache.articles;
