@@ -7,7 +7,7 @@
     const { date, articles } = data;
 </script>
 
-<h1>blog.ykyki.net</h1>
+<h1><span>blog.ykyki.net</span></h1>
 <p><b>🚧under construction🚧</b></p>
 <p>rendered at {date}</p>
 
@@ -21,3 +21,13 @@
         <hr />
     {/each}
 </div>
+
+<style>
+    h1 > span {
+        background: linear-gradient(60deg, #f2a874, #cdaf92);
+        /* background: linear-gradient(45deg, #e66465, #9198e5); */
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+</style>
