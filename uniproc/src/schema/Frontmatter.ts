@@ -1,5 +1,8 @@
 export type Frontmatter = {
     title: string;
-    date: Date;
+    createdAt: Date;
+    updatedAt: Date;
     tags: string[];
+    slug: string;
+    draft: boolean;
 };

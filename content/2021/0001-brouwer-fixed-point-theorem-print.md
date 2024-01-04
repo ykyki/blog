@@ -1,7 +1,8 @@
 ---
 title: "Brouwer の不動点定理 (発表資料)"
-date: "2020-02-03T00:36:42+09:00"
-url: "blog/brouwer-fixed-point-theorem-print"
+slug: "brouwer-fixed-point-theorem-print"
+createdAt: "2020-02-03T00:36:42+09:00"
+updatedAt: "2020-02-03T00:36:42+09:00"
 draft: false
 categories: ["math"]
 tags: ["topology"]

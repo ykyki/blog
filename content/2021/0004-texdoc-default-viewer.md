@@ -1,7 +1,8 @@
 ---
 title: "texdoc で使う PDF ビューアーを設定する"
-date: "2021-02-02T21:41:19+09:00"
-url: "blog/texdoc-default-viewer"
+slug: "texdoc-default-viewer"
+createdAt: "2021-02-02T21:41:19+09:00"
+updatedAt: "2021-02-02T21:41:19+09:00"
 draft: false
 categories: ["tech"]
 tags: ["TeX"]

@@ -1,7 +1,8 @@
 ---
 title: "WSL+TeX Live環境を一から構築する"
-date: "2020-04-27T02:38:25+09:00"
-url: "blog/install-wsl-and-texlive"
+slug: "install-wsl-and-texlive"
+createdAt: "2020-04-27T02:38:25+09:00"
+updatedAt: "2020-04-27T02:38:25+09:00"
 draft: false
 categories: ["tech"]
 tags: ["TeX", "vscode"]

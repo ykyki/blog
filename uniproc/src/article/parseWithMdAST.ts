@@ -48,8 +48,11 @@ const remarkProcessor = () =>
 
 const frontmatterSchema = z.object({
     title: z.string(),
-    date: z.coerce.date(),
+    createdAt: z.coerce.date(),
+    updatedAt: z.coerce.date(),
     tags: z.array(z.string()),
+    slug: z.string().regex(/^[a-z0-9_-]+$/i),
+    draft: z.boolean().default(true),
 });
 
 const extractFrontmatter = (tree: mdAst.Root): Schema.Frontmatter => {

@@ -1,8 +1,8 @@
 ---
 title: "LaTeX Workshop で subflies まわりの挙動に変更があったので対応する"
-date: "2020-02-18T00:00:00+09:00"
-url: "blog/adapt-to-latex-workshop-subfiles"
-draft: false
+slug: "adapt-to-latex-workshop-subfiles"
+createdAt: "2020-02-18T00:00:00+09:00"
+updatedAt: "2020-02-18T00:00:00+09:00"
 categories: ["tech"]
 tags: ["TeX", "vscode"]
 keywords:
