@@ -26,6 +26,7 @@
     <ul>
         {#each article.headings as heading}
             <li>
+                {'#'.repeat(heading.depth)}{' '}
                 <InlineComponent component={heading} />
             </li>
         {/each}
