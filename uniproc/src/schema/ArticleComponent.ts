@@ -5,7 +5,8 @@ export type InlineComponent =
     | InlineCode
     | Emphasis
     | Strong
-    | InlineMath;
+    | InlineMath
+    | Image;
 
 export interface Root extends IsParent {
     type: 'root';
@@ -75,6 +76,12 @@ export interface DisplayMath extends IsLeaf, IsLiteral {
 export interface InlineMath extends IsLeaf, IsLiteral {
     type: 'inlineMath';
     value: string;
+}
+
+export interface Image extends IsLeaf {
+    type: 'image';
+    url: string;
+    alt?: string;
 }
 
 export interface IsLiteral extends IsLeaf {

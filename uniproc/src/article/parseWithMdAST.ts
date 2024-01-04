@@ -130,6 +130,8 @@ const convertMdAstParagraph = (node: mdAst.Paragraph): Schema.Paragraph => {
                 return convertMdAstStrong(n);
             case 'inlineMath':
                 return convertMdAstInlineMath(n);
+            case 'image':
+                return convertMdAstImage(n);
             default:
                 throw new Error(`Unsupported paragraph children: ${n.type}`);
         }
@@ -231,6 +233,14 @@ const convertMdAstStrong = (node: mdAst.Strong): Schema.Strong => {
         } satisfies Schema.Strong;
     }
     throw new Error(`Ill-formed strong${JSON.stringify(node)}`);
+};
+
+const convertMdAstImage = (node: mdAst.Image): Schema.Image => {
+    return {
+        type: 'image',
+        url: node.url,
+        alt: node.alt ?? undefined,
+    } satisfies Schema.Image;
 };
 
 const convertMdAstMath = (node: mdAstMath.Math): Schema.DisplayMath => {
