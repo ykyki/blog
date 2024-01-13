@@ -7,25 +7,25 @@ on:
 
 jobs:
   install-pnpm-deps:
-    uses: ./.github/workflows/install-pnpm-deps.yaml
+    uses: ./.github/workflows/_install-pnpm-deps.yaml
 
   build-uniproc:
     needs: install-pnpm-deps
-    uses: ./.github/workflows/build-uniproc.yaml
+    uses: ./.github/workflows/_build-uniproc.yaml
 
   build-sveltecf:
     needs:
       - install-pnpm-deps
       - build-uniproc
-    uses: ./.github/workflows/build-sveltecf.yaml
+    uses: ./.github/workflows/_build-sveltecf.yaml
 
   verify-uniproc:
     needs: build-uniproc
-    uses: ./.github/workflows/verify-uniproc.yaml
+    uses: ./.github/workflows/_verify-uniproc.yaml
 
   verify-sveltecf:
     needs: build-sveltecf
-    uses: ./.github/workflows/verify-sveltecf.yaml
+    uses: ./.github/workflows/_verify-sveltecf.yaml
 
   upload-sveltecf:
     needs: build-sveltecf
