@@ -1,6 +1,5 @@
 <script lang="ts">
     import Logo from '$lib/component/Logo.svelte';
-    import { base } from '$app/paths';
 </script>
 
 <section>
