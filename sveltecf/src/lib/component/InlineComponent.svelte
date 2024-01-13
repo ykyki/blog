@@ -16,7 +16,14 @@
 {:else if component.type === 'inlineMath'}<MathExpr
         expr={component.value}
         mode={'inline'} />
-{:else if component.type === 'image'}<img
-        src={component.url}
-        alt={component.alt} />
+{:else if component.type === 'image'}<a href={component.url}
+        ><img src={component.url} alt={component.alt} /></a>
 {/if}
+
+<style>
+    code {
+        display: inline;
+        font-family: var(--font-mono);
+        white-space: pre-wrap;
+    }
+</style>

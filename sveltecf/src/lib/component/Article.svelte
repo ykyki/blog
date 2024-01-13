@@ -39,3 +39,21 @@
         <DisplayComponent {component} />
     {/each}
 </article>
+
+<style>
+    h1 {
+        min-width: 100%;
+        font-size: var(--font-size-6);
+        font-weight: var(--font-weight-7);
+        white-space: pre-wrap;
+
+        background: var(--gradient-29);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    h1 > a {
+        text-decoration: underline;
+    }
+</style>

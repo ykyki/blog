@@ -39,3 +39,24 @@
 {:else if component.type === 'displayMath'}
     <MathExpr expr={component.value} mode={'display'} />
 {/if}
+
+<style>
+    p {
+        min-width: 100%;
+    }
+    pre {
+        min-width: 100%;
+        padding: var(--size-2);
+        overflow: scroll;
+        border: var(--border-size-1) solid var(--gray-1);
+    }
+    li {
+        min-width: 100%;
+        white-space: pre-wrap;
+    }
+    code {
+        width: 100%;
+        font-family: var(--font-mono);
+        letter-spacing: var(--font-letterspacing-0);
+    }
+</style>

@@ -15,10 +15,12 @@
 </Bottom>
 
 <style>
+    header,
+    main,
     footer {
-        margin-top: 1rem;
-        padding: 1rem;
-        color: var(--red-6);
-        text-align: center;
+        width: 100%;
+        max-width: 768px;
+        margin: 0 auto;
+        padding: 0 var(--size-2);
     }
 </style>
