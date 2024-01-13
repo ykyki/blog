@@ -1,4 +1,5 @@
 <script lang="ts">
+    import BlogBase from '$lib/component/layout/BlogBase.svelte';
     import Article from '$lib/component/Article.svelte';
     import type { PageData } from './$types';
 
@@ -7,8 +8,10 @@
     const { articles } = data;
 </script>
 
-{#each articles as article}
-    {@const titleLink = `/article/${article.frontmatter.slug}`}
-    <Article {titleLink} {article} />
-    <hr />
-{/each}
+<BlogBase>
+    {#each articles as article}
+        {@const titleLink = `/article/${article.frontmatter.slug}`}
+        <Article {titleLink} {article} />
+        <hr />
+    {/each}
+</BlogBase>
