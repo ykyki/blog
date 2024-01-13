@@ -4,11 +4,11 @@
     import type { Schema } from 'uniproc';
 
     export let article: Schema.Article;
-    export let titleLink: string | undefined = undefined;
+    export let articlePath: string | undefined = undefined;
 </script>
 
 <h1>
-    {#if titleLink}<a href={titleLink}>{article.title}</a
+    {#if articlePath}<a href={articlePath}>{article.title}</a
         >{:else}{article.title}{/if}
 </h1>
 

@@ -1,6 +1,7 @@
 <script lang="ts">
     import BlogBase from '$lib/component/layout/BlogBase.svelte';
     import Article from '$lib/component/Article.svelte';
+    import { resolveRoute } from '$app/paths';
     import type { PageData } from './$types';
 
     export let data: PageData;
@@ -10,8 +11,10 @@
 
 <BlogBase>
     {#each articles as article}
-        {@const titleLink = `/article/${article.frontmatter.slug}`}
-        <Article {titleLink} {article} />
+        {@const articlePath = resolveRoute(`/article/[slug]`, {
+            slug: article.frontmatter.slug,
+        })}
+        <Article {articlePath} {article} />
         <hr />
     {/each}
 </BlogBase>

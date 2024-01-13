@@ -5,8 +5,7 @@
 
     export let data: PageData;
 
-    const { slug, article } = data;
-    const titleLink = `/article/${slug}`;
+    const { article } = data;
 </script>
 
 <svelte:head>
@@ -15,5 +14,5 @@
 </svelte:head>
 
 <BlogBase>
-    <Article {titleLink} {article} />
+    <Article {article} />
 </BlogBase>
