@@ -7,38 +7,40 @@
     export let articlePath: string | undefined = undefined;
 </script>
 
-<h1>
-    {#if articlePath}<a href={articlePath}>{article.title}</a
-        >{:else}{article.title}{/if}
-</h1>
+<section>
+    <h1>
+        {#if articlePath}<a href={articlePath}>{article.title}</a
+            >{:else}{article.title}{/if}
+    </h1>
 
-<div>
-    <ul>
-        <li>created: {article.frontmatter.createdAt.toString()}</li>
-        <li>updated: {article.frontmatter.updatedAt.toString()}</li>
-    </ul>
+    <div>
+        <ul>
+            <li>created: {article.frontmatter.createdAt.toString()}</li>
+            <li>updated: {article.frontmatter.updatedAt.toString()}</li>
+        </ul>
 
-    tags:
-    <ul>
-        {#each article.frontmatter.tags as tag}<li>{tag}</li>{/each}
-    </ul>
+        tags:
+        <ul>
+            {#each article.frontmatter.tags as tag}<li>{tag}</li>{/each}
+        </ul>
 
-    Table of Contents:
-    <ul>
-        {#each article.headings as heading}
-            <li>
-                {'#'.repeat(heading.depth)}{' '}
-                <InlineComponent component={heading} />
-            </li>
+        Table of Contents:
+        <ul>
+            {#each article.headings as heading}
+                <li>
+                    {'#'.repeat(heading.depth)}{' '}
+                    <InlineComponent component={heading} />
+                </li>
+            {/each}
+        </ul>
+    </div>
+
+    <article>
+        {#each article.root.children as component}
+            <DisplayComponent {component} />
         {/each}
-    </ul>
-</div>
-
-<article>
-    {#each article.root.children as component}
-        <DisplayComponent {component} />
-    {/each}
-</article>
+    </article>
+</section>
 
 <style>
     h1 {
@@ -51,9 +53,17 @@
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
+        background-color: red;
     }
 
     h1 > a {
         text-decoration: underline;
+    }
+
+    article {
+        font-family: var(--font-sans);
+    }
+    article > :global(*) {
+        line-height: var(--font-lineheight-5);
     }
 </style>

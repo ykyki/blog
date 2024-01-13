@@ -18,3 +18,11 @@
         <hr />
     {/each}
 </BlogBase>
+
+<style>
+    hr {
+        background-color: var(--surface-4);
+        height: var(--size-1);
+        margin: var(--size-4) 0;
+    }
+</style>

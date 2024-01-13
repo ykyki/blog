@@ -49,6 +49,7 @@
         padding: var(--size-2);
         overflow: scroll;
         border: var(--border-size-1) solid var(--gray-1);
+        background-color: var(--surface-2);
     }
     li {
         min-width: 100%;
