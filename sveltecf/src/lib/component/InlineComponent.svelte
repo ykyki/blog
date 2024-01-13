@@ -26,4 +26,15 @@
         font-family: var(--font-mono);
         white-space: pre-wrap;
     }
+
+    a {
+        text-decoration: underline;
+
+        &:hover {
+            color: var(--text-2);
+        }
+    }
+    a:visited {
+        color: var(--link-visited);
+    }
 </style>

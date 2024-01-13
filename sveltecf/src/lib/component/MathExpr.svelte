@@ -37,3 +37,9 @@
         <span bind:this={mathRef} />
     </div>
 {/if}
+
+<style>
+    div {
+        overflow: scroll;
+    }
+</style>
