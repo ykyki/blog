@@ -14,7 +14,7 @@ export const load = (async ({ params }) => {
     );
 
     if (article === undefined) {
-        throw error(404, 'Not found');
+        error(404, 'Not found');
     }
 
     return {
