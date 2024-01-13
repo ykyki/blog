@@ -32,6 +32,9 @@ importers:
       katex:
         specifier: ^0.16.9
         version: 0.16.9
+      open-props:
+        specifier: ^1.6.17
+        version: 1.6.17
     devDependencies:
       '@playwright/test':
         specifier: ^1.40.1
@@ -2798,6 +2801,10 @@ packages:
     dependencies:
       mimic-fn: 4.0.0
     dev: true
+
+  /open-props@1.6.17:
+    resolution: {integrity: sha512-6mp/gpLQz/ZwrGLz+i7tSJ3eWNLE1KxLXHO+b6xxRyZ1Alp4TgTcvHiQ89rC2IkvsU3/IRhpIJuxl7rRCwUzLA==}
+    dev: false
 
   /optionator@0.9.3:
     resolution: {integrity: sha512-JjCoypp+jKn1ttEFExxhetCKeJt9zhAgAve5FXHixTvFDW/5aEktX9bufBKLRRMdU7bNtpLfcGu94B3cdEJgjg==}

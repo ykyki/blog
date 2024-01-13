@@ -39,6 +39,7 @@
     },
     "type": "module",
     "dependencies": {
-        "katex": "^0.16.9"
+        "katex": "^0.16.9",
+        "open-props": "^1.6.17"
     }
 }
