@@ -35,5 +35,14 @@
     "[svelte]": {
         "editor.defaultFormatter": "svelte.svelte-vscode"
     },
+    "cssvar.files": [
+        "./sveltecf/node_modules/open-props/open-props.min.css"
+        // if you have an alternative path to where your styles are located
+        // you can add it in this array of files
+        // "assets/styles/variables.css"
+    ],
+    "cssvar.ignore": [],
+    // add support for autocomplete in JS or JS like files
+    "cssvar.extensions": ["css", "postcss", "jsx", "tsx", "svelte"],
     "cSpell.words": ["katex", "sveltecf", "uniproc", "ykyki"]
 }
