@@ -13,7 +13,7 @@
         "lint:eslint": "eslint --ext .js,.ts,.svelte .",
         "test": "pnpm run -F sveltecf --parallel \"/test:.+/\"",
         "test:unit": "vitest run",
-        "test:integration": "playwright test",
+        "test:e2e": "playwright test",
         "pages:dev": "wrangler pages dev --compatibility-date=2023-10-25 --proxy 5173 -- pnpm run dev",
         "pages:deploy": "pnpm run  build && wrangler pages deploy .svelte-kit/cloudflare",
         "clean": "pnpm run -F sveltecf --parallel \"/clean:.+/\"",
