@@ -10,6 +10,10 @@
     a:hover {
         text-decoration: none;
     }
+    span::selection {
+        background: var(--blue-2);
+        -webkit-text-fill-color: var(--yellow-6);
+    }
     .logo {
         background: var(--gradient-19);
         -webkit-background-clip: text;

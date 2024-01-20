@@ -6,7 +6,6 @@
     export let data: PageData;
 
     const { articles } = data;
-    const articleAllPath = resolveRoute(`/article/all`, {});
 </script>
 
 <BlogBase>
@@ -15,7 +14,7 @@
     <section>
         <h2>Articles</h2>
         {#each articles as article}
-            {@const articlePath = resolveRoute(`/article/[slug]`, {
+            {@const articlePath = resolveRoute('/article/[slug]', {
                 slug: article.frontmatter.slug,
             })}
             <section>
@@ -27,8 +26,7 @@
         {/each}
 
         <section>
-            <h3><a href={articleAllPath}>All articles</a></h3>
-            <p>…</p>
+            <h3><a href={resolveRoute('/article/all', {})}>All articles</a></h3>
         </section>
     </section>
 </BlogBase>
@@ -36,10 +34,12 @@
 <style>
     a {
         text-decoration: underline;
+
         &:hover {
             color: var(--text-2);
         }
     }
+
     a:visited {
         color: var(--link-visited);
     }
