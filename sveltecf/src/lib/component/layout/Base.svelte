@@ -24,6 +24,7 @@
 
 <style>
     .base {
+        padding: 0 var(--size-4);
         display: flex;
         flex-direction: column;
         min-height: 100vh;

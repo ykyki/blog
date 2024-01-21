@@ -6,23 +6,34 @@
 <div>
     <nav>
         <Logo size="large" />
-        <a href={resolveRoute('/about', {})}>About</a>
+        <div>
+            <a href={resolveRoute('/about', {})}>About</a>
+        </div>
     </nav>
 </div>
 
 <style>
     nav {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         align-items: baseline;
-    }
+        gap: var(--size-2);
 
-    nav a {
-        color: var(--color-on-primary);
-        text-decoration: none;
-    }
+        & > div {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: baseline;
+            gap: var(--size-2);
+        }
 
-    nav a:hover {
-        text-decoration: underline;
+        & a {
+            color: var(--color-on-primary);
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 </style>
