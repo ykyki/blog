@@ -8,6 +8,7 @@
         <Logo size="large" />
         <div>
             <a href={resolveRoute('/about', {})}>About</a>
+            <a href={resolveRoute('/article', {})}>Article</a>
         </div>
     </nav>
 </div>
@@ -18,7 +19,7 @@
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: baseline;
-        gap: var(--size-2);
+        gap: var(--size-1);
 
         & > div {
             display: flex;

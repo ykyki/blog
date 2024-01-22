@@ -5,7 +5,7 @@ export const prerender = true;
 
 export const load = (async () => {
     const articles = (await fetchAllArticles()).sort((a, b) =>
-        a.frontmatter.createdAt > b.frontmatter.createdAt ? 1 : -1,
+        a.frontmatter.createdAt < b.frontmatter.createdAt ? 1 : -1,
     );
 
     return {

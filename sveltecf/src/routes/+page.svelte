@@ -12,22 +12,34 @@
     <p><b>🚧under construction🚧</b></p>
 
     <section>
-        <h2>Articles</h2>
-        {#each articles as article}
-            {@const articlePath = resolveRoute('/article/[slug]', {
-                slug: article.frontmatter.slug,
-            })}
-            <section>
-                <h3><a href={articlePath}>{article.title}</a></h3>
-                <p>created: {article.frontmatter.createdAt.toString()}</p>
-                <p>updated: {article.frontmatter.updatedAt.toString()}</p>
-                <p>tags: {article.frontmatter.tags.join(', ')}</p>
-            </section>
-        {/each}
+        <p>TODO: このブログの紹介文</p>
+    </section>
 
+    <section>
+        <h2>Latest</h2>
         <section>
-            <h3><a href={resolveRoute('/article/all', {})}>All articles</a></h3>
+            <h3>Post</h3>
+            <p>TODO</p>
         </section>
+        <section>
+            <h3>Article</h3>
+            {#each articles as article}
+                {@const articlePath = resolveRoute('/article/[slug]', {
+                    slug: article.frontmatter.slug,
+                })}
+                <section>
+                    <h4><a href={articlePath}>{article.title}</a></h4>
+                    <p>created: {article.frontmatter.createdAt.toString()}</p>
+                    <p>updated: {article.frontmatter.updatedAt.toString()}</p>
+                    <p>tags: {article.frontmatter.tags.join(', ')}</p>
+                </section>
+            {/each}
+        </section>
+    </section>
+
+    <section>
+        <h2>Navigation</h2>
+        <p>TODO</p>
     </section>
 </BlogBase>
 

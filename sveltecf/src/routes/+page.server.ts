@@ -7,7 +7,7 @@ export const load = (async () => {
     const articles = (await fetchAllArticles())
         .filter((a) => a.frontmatter.draft === false)
         .sort((a, b) =>
-            a.frontmatter.createdAt > b.frontmatter.createdAt ? 1 : -1,
+            a.frontmatter.createdAt < b.frontmatter.createdAt ? 1 : -1,
         );
 
     return {
