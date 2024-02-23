@@ -1,4 +1,4 @@
-name: verify-uniproc
+name: _verify-uniproc
 
 on:
   workflow_call:

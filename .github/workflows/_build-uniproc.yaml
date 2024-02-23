@@ -1,4 +1,4 @@
-name: build-uniproc
+name: _build-uniproc
 
 on:
   workflow_call:
