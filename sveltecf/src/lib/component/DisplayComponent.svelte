@@ -40,7 +40,7 @@
         {#await codeToHtml( component.value, { lang: component.lang ?? 'plaintext', theme: 'andromeeda' }, )}
             <pre><code>{component.value}</code></pre>
         {:then value}
-            {@html value}
+            {@html value}<!-- eslint-disable-line svelte/no-at-html-tags -->
         {/await}
     {:else if component.type === 'displayMath'}
         <MathExpr expr={component.value} mode={'display'} />
