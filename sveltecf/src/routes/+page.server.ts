@@ -11,7 +11,7 @@ export const load = (async () => {
         );
 
     return {
-        date: new Date().toISOString(),
+        currentDate: new Date().toISOString(),
         articles,
     };
 }) satisfies PageServerLoad;
