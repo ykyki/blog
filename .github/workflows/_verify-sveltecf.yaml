@@ -1,4 +1,4 @@
-name: verify-sveltecf
+name: _verify-sveltecf
 
 on:
   workflow_call:

@@ -1,4 +1,4 @@
-name: build-uniproc
+name: _build-sveltecf
 
 on:
   workflow_call:
