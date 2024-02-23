@@ -1,35 +1,86 @@
 <script lang="ts">
-    import BlogBase from '$lib/component/layout/BlogBase.svelte';
     import Icon from '@iconify/svelte';
 </script>
 
-<BlogBase>
-    <article>
-        <h1>About</h1>
-        <p><b>🚧under construction🚧</b></p>
-        <h2>Links</h2>
-        <ol>
-            <li>
-                GitHub<Icon icon="mdi:github" />:
-                <a href="https://github.com/ykyki">https://github.com/ykyki</a>
-            </li>
-            <li>
-                Zenn<Icon icon="simple-icons:zenn" />:
-                <a href="https://zenn.dev/ykyki">https://zenn.dev/ykyki</a>
-            </li>
-            <li>
-                Bluesky<Icon icon="ri:bluesky-fill" />:
-                <a href="https://bsky.app/profile/ykyki.bsky.social"
-                    >https://bsky.app/profile/ykyki.bsky.social</a>
-            </li>
-        </ol>
-    </article>
-</BlogBase>
+<article>
+    <h1>About</h1>
+
+    <section class="me">
+        <h2>Me</h2>
+        <section>
+            <h3>Link</h3>
+            <table>
+                <tr>
+                    <th>GitHub</th>
+                    <td
+                        ><a href="https://github.com/ykyki"
+                            ><Icon icon="mdi:github" /></a>
+                    </td>
+                    <td>
+                        <a href="https://github.com/ykyki"
+                            >https://github.com/ykyki</a
+                        ></td>
+                </tr>
+                <tr>
+                    <th>Zenn</th>
+                    <td
+                        ><a href="https://zenn.dev/ykyki"
+                            ><Icon icon="simple-icons:zenn" /></a>
+                    </td>
+                    <td>
+                        <a href="https://zenn.dev/ykyki"
+                            >https://zenn.dev/ykyki</a
+                        ></td>
+                </tr>
+                <tr>
+                    <th>Bluesky</th>
+                    <td
+                        ><a href="https://bsky.app/profile/ykyki.bsky.social"
+                            ><Icon icon="ri:bluesky-fill" /></a>
+                    </td>
+                    <td
+                        ><a href="https://bsky.app/profile/ykyki.bsky.social"
+                            >https://bsky.app/profile/ykyki.bsky.social</a
+                        ></td>
+                </tr>
+            </table>
+        </section>
+    </section>
+
+    <section>
+        <h2>Blog</h2>
+        <p>このブログについて</p>
+    </section>
+</article>
 
 <style>
-    :global(svg) {
+    h1 {
+        color: var(--yellow-4);
+    }
+
+    article {
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-3);
+    }
+
+    table {
+        margin: var(--size-1) auto;
+        min-width: 80%;
+        border-radius: var(--radius-conditional-2);
+    }
+
+    article > section {
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-2);
+    }
+
+    table :global(svg) {
         display: inline;
         font-size: var(--font-size-4);
-        margin: 0 var(--size-1);
+        min-width: var(--size-4);
+        vertical-align: middle;
+        color: var(--text-1);
     }
 </style>

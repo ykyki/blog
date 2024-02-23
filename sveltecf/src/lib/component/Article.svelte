@@ -7,56 +7,47 @@
     export let articlePath: string | undefined = undefined;
 </script>
 
-<section>
-    <h1>
-        {#if articlePath}<a href={articlePath}>{article.title}</a
-            >{:else}{article.title}{/if}
-    </h1>
+<h1>
+    {#if articlePath}<a href={articlePath}>{article.title}</a
+        >{:else}{article.title}{/if}
+</h1>
 
-    <div>
-        <ul>
-            <li>created: {article.frontmatter.createdAt.toString()}</li>
-            <li>updated: {article.frontmatter.updatedAt.toString()}</li>
-        </ul>
+<div>
+    <ul>
+        <li>created: {article.frontmatter.createdAt.toString()}</li>
+        <li>updated: {article.frontmatter.updatedAt.toString()}</li>
+    </ul>
 
-        tags:
-        <ul>
-            {#each article.frontmatter.tags as tag}<li>{tag}</li>{/each}
-        </ul>
+    tags:
+    <ul>
+        {#each article.frontmatter.tags as tag}<li>{tag}</li>{/each}
+    </ul>
 
-        Table of Contents:
-        <ul>
-            {#each article.headings as heading}
-                <li>
-                    {'#'.repeat(heading.depth)}{' '}
-                    <InlineComponent component={heading} />
-                </li>
-            {/each}
-        </ul>
-    </div>
-
-    <article>
-        {#each article.root.children as component}
-            <DisplayComponent {component} />
+    Table of Contents:
+    <ul>
+        {#each article.headings as heading}
+            <li>
+                {'#'.repeat(heading.depth)}{' '}
+                <InlineComponent component={heading} />
+            </li>
         {/each}
-    </article>
-</section>
+    </ul>
+</div>
+
+<article>
+    {#each article.root.children as component}
+        <DisplayComponent {component} />
+    {/each}
+</article>
 
 <style>
     h1 {
-        min-width: 100%;
-        font-size: var(--font-size-6);
-        font-weight: var(--font-weight-7);
-        white-space: pre-wrap;
-
-        background: var(--gradient-29);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-color: red;
+        color: var(--yellow-4);
+        word-break: keep-all;
+        overflow-wrap: break-word;
     }
-
     h1 > a {
+        color: var(--yellow-4);
         text-decoration: underline;
     }
 
