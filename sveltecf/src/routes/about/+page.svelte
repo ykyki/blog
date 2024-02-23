@@ -64,16 +64,16 @@
         gap: var(--size-3);
     }
 
-    table {
-        margin: var(--size-1) auto;
-        min-width: 80%;
-        border-radius: var(--radius-conditional-2);
-    }
-
     article > section {
         display: flex;
         flex-direction: column;
         gap: var(--size-2);
+    }
+
+    table {
+        min-width: 70%;
+        margin: var(--size-1) auto;
+        border-radius: var(--radius-conditional-2);
     }
 
     table :global(svg) {
@@ -82,5 +82,9 @@
         min-width: var(--size-4);
         vertical-align: middle;
         color: var(--text-1);
+    }
+
+    table td {
+        word-break: break-all;
     }
 </style>
