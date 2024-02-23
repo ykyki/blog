@@ -35,7 +35,7 @@
 
         & > * {
             width: 100%;
-            max-width: 768px;
+            max-width: var(--size-md);
             margin: 0 auto;
         }
     }
@@ -44,5 +44,27 @@
         height: 0;
         border: var(--border-size-1) solid var(--surface-4);
         margin: var(--size-2) 0;
+    }
+
+    :global(h1) {
+        font-size: var(--font-size-7);
+    }
+    :global(h2) {
+        font-size: var(--font-size-6);
+    }
+    :global(h3) {
+        font-size: var(--font-size-5);
+    }
+
+    @media (width < 768px) {
+        :global(h1) {
+            font-size: var(--font-size-5);
+        }
+        :global(h2) {
+            font-size: var(--font-size-4);
+        }
+        :global(h3) {
+            font-size: var(--font-size-3);
+        }
     }
 </style>
