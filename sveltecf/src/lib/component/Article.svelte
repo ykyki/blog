@@ -43,8 +43,6 @@
 <style>
     h1 {
         color: var(--yellow-4);
-        word-break: keep-all;
-        overflow-wrap: break-word;
     }
     h1 > a {
         color: var(--yellow-4);
