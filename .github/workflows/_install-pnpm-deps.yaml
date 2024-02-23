@@ -2,6 +2,11 @@ name: install-pnpm-deps
 
 on:
   workflow_call:
+    inputs:
+      use-pnpm-store-cache:
+        type: boolean
+        required: false
+        default: true
 
 jobs:
   cache-and-install:
@@ -16,12 +21,13 @@ jobs:
           REQUIRE_BUN: 'false'
       - uses: ./.github/actions/restore-pnpm-store-cache
         id: restore-pnpm-store-cache
+        if: inputs.use-pnpm-store-cache == true
       - run: pnpm install
         if: steps.restore-pnpm-store-cache.outputs.cache-hit != 'true'
       - name: Get pnpm store directory
         run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
       - name: Save pnpm-store cache
-        uses: actions/cache/save@v3
+        uses: actions/cache/save@v4
         if: steps.restore-pnpm-store-cache.outputs.cache-hit != 'true'
         with:
           path: ${{ env.PNPM_STORE_PATH }}

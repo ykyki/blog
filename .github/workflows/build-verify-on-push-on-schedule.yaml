@@ -1,11 +1,15 @@
-name: Build🔨, Verify🧪 on push
+name: Build🔨, Verify🧪 on schedule
 
 on:
-  push:
+  schedule:
+    - cron: '0 3 * * Sat'
+  workflow_dispatch:
 
 jobs:
   install-pnpm-deps:
     uses: ./.github/workflows/_install-pnpm-deps.yaml
+    with:
+      use-pnpm-store-cache: false
 
   build-uniproc:
     needs: install-pnpm-deps

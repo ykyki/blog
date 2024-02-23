@@ -16,7 +16,7 @@ jobs:
         working-directory: ./uniproc
       - run: pnpm uniproc build
       - name: Save uniproc-dist cache
-        uses: actions/cache/save@v3
+        uses: actions/cache/save@v4
         with:
           path: ./uniproc/dist
           key: uniproc-dist-${{ github.sha }}

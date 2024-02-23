@@ -14,12 +14,12 @@ jobs:
           REQUIRE_BUN: 'false'
       - uses: ./.github/actions/restore-pnpm-store-cache
       - name: Restore uniproc-dist cache
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v4
         with:
           path: ./uniproc/dist
           key: uniproc-dist-${{ github.sha }}
       - name: Restore sveletecf cache
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v4
         with:
           path: ./sveltecf/.svelte-kit
           key: sveltecf-kit-${{ github.sha }}
@@ -40,12 +40,12 @@ jobs:
           REQUIRE_BUN: 'false'
       - uses: ./.github/actions/restore-pnpm-store-cache
       - name: Restore uniproc-dist cache
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v4
         with:
           path: ./uniproc/dist
           key: uniproc-dist-${{ github.sha }}
       - name: Restore sveletecf cache
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v4
         with:
           path: ./sveltecf/.svelte-kit
           key: sveltecf-kit-${{ github.sha }}
