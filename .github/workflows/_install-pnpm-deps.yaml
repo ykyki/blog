@@ -27,7 +27,7 @@ jobs:
       - name: Get pnpm store directory
         run: echo "PNPM_STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
       - name: Save pnpm-store cache
-        uses: actions/cache/save@v3
+        uses: actions/cache/save@v4
         if: steps.restore-pnpm-store-cache.outputs.cache-hit != 'true'
         with:
           path: ${{ env.PNPM_STORE_PATH }}

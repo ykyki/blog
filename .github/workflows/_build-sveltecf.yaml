@@ -14,7 +14,7 @@ jobs:
           REQUIRE_BUN: 'false'
       - uses: ./.github/actions/restore-pnpm-store-cache
       - name: Restore uniproc-dist cache
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v4
         with:
           path: ./uniproc/dist
           key: uniproc-dist-${{ github.sha }}
@@ -23,7 +23,7 @@ jobs:
         working-directory: ./sveltecf
       - run: pnpm sveltecf build
       - name: Save sveltecf-kit cache
-        uses: actions/cache/save@v3
+        uses: actions/cache/save@v4
         with:
           path: ./sveltecf/.svelte-kit
           key: sveltecf-kit-${{ github.sha }}
