@@ -1,5 +1,4 @@
 <script lang="ts">
-    import BlogBase from '$lib/component/layout/BlogBase.svelte';
     import { resolveRoute } from '$app/paths';
     import type { PageData } from './$types';
     import { format } from 'date-fns';
@@ -10,92 +9,90 @@
     const dateFormat = 'yyyy-MM-dd';
 </script>
 
-<BlogBase>
-    <div class="base">
-        <section>
-            <h2>Post</h2>
-            <dl class="list">
-                {#each posts as post}
-                    <div class="post">
-                        <dt>
-                            {#if post.url !== undefined}
-                                <a href={post.url}>{post.title}</a>
-                            {:else}
-                                {post.title}
-                            {/if}
-                        </dt>
-                        <dd>
-                            <dl class="meta">
-                                <div>
-                                    <dt>posted</dt>
+<div class="base">
+    <section>
+        <h2>Post</h2>
+        <dl class="list">
+            {#each posts as post}
+                <div class="post">
+                    <dt>
+                        {#if post.url !== undefined}
+                            <a href={post.url}>{post.title}</a>
+                        {:else}
+                            {post.title}
+                        {/if}
+                    </dt>
+                    <dd>
+                        <dl class="meta">
+                            <div>
+                                <dt>posted</dt>
+                                <dd>
+                                    {format(post.postDate, dateFormat)}
+                                </dd>
+                            </div>
+                            <div>
+                                {#if post.description !== undefined}
+                                    <dt>description</dt>
                                     <dd>
-                                        {format(post.postDate, dateFormat)}
+                                        {post.description}
                                     </dd>
-                                </div>
-                                <div>
-                                    {#if post.description !== undefined}
-                                        <dt>description</dt>
-                                        <dd>
-                                            {post.description}
-                                        </dd>
-                                    {/if}
-                                </div>
-                            </dl>
-                        </dd>
-                    </div>
-                {/each}
-            </dl>
-        </section>
+                                {/if}
+                            </div>
+                        </dl>
+                    </dd>
+                </div>
+            {/each}
+        </dl>
+    </section>
 
-        <section>
-            <h2>Article</h2>
-            <dl class="list">
-                {#each articles as article}
-                    {@const articlePath = resolveRoute('/article/[slug]', {
-                        slug: article.frontmatter.slug,
-                    })}
-                    <div class="article">
-                        <dt><a href={articlePath}>{article.title}</a></dt>
-                        <dd>
-                            <dl class="meta">
-                                <div>
-                                    <dt>created</dt>
-                                    <dd>
-                                        {format(
-                                            article.frontmatter.createdAt,
-                                            dateFormat,
-                                        )}
-                                    </dd>
-                                </div>
-                                <div>
-                                    <dt>updated</dt>
-                                    <dd>
-                                        {format(
-                                            article.frontmatter.updatedAt,
-                                            dateFormat,
-                                        )}
-                                    </dd>
-                                </div>
-                                <div class="tags">
-                                    <dt>tag</dt>
-                                    <dd>
-                                        <ul>
-                                            {#each article.frontmatter.tags as tag}
-                                                <li>
-                                                    {tag}
-                                                </li>
-                                            {/each}
-                                        </ul>
-                                    </dd>
-                                </div>
-                            </dl>
-                        </dd>
-                    </div>
-                {/each}
-            </dl>
-        </section>
-    </div>
-</BlogBase>
+    <section>
+        <h2>Article</h2>
+        <dl class="list">
+            {#each articles as article}
+                {@const articlePath = resolveRoute('/article/[slug]', {
+                    slug: article.frontmatter.slug,
+                })}
+                <div class="article">
+                    <dt><a href={articlePath}>{article.title}</a></dt>
+                    <dd>
+                        <dl class="meta">
+                            <div>
+                                <dt>created</dt>
+                                <dd>
+                                    {format(
+                                        article.frontmatter.createdAt,
+                                        dateFormat,
+                                    )}
+                                </dd>
+                            </div>
+                            <div>
+                                <dt>updated</dt>
+                                <dd>
+                                    {format(
+                                        article.frontmatter.updatedAt,
+                                        dateFormat,
+                                    )}
+                                </dd>
+                            </div>
+                            <div class="tags">
+                                <dt>tag</dt>
+                                <dd>
+                                    <ul>
+                                        {#each article.frontmatter.tags as tag}
+                                            <li>
+                                                {tag}
+                                            </li>
+                                        {/each}
+                                    </ul>
+                                </dd>
+                            </div>
+                        </dl>
+                    </dd>
+                </div>
+            {/each}
+        </dl>
+    </section>
+</div>
 
 <style>
     a {
