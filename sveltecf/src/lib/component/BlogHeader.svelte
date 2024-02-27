@@ -1,14 +1,14 @@
 <script lang="ts">
     import Logo from '$lib/component/Logo.svelte';
-    import { resolveRoute } from '$app/paths';
+    import { base } from '$app/paths';
 </script>
 
 <div>
     <nav>
         <Logo size="large" />
         <div>
-            <a href={resolveRoute('/about', {})}>About</a>
-            <a href={resolveRoute('/article', {})}>Article</a>
+            <a href="{base}/about">About</a>
+            <a href="{base}/article">Article</a>
         </div>
     </nav>
 </div>

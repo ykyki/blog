@@ -1,24 +1,30 @@
 <script lang="ts">
     import Icon from '@iconify/svelte';
-    import { resolveRoute } from '$app/paths';
+    import { base } from '$app/paths';
 </script>
 
 <div class="footer">
     <div class="icons">
-        <a href={resolveRoute('/', {})}><Icon icon="ion:home-sharp" /></a>
+        <a href={base}><Icon icon="ion:home-sharp" /></a>
         <a href="https://github.com/ykyki"><Icon icon="mdi:github" /></a>
         <a href="https://github.com/ykyki/blog"
             ><Icon icon="mdi:file-code" /></a>
     </div>
-    <p>Copyright &copy; ykyki. 2024. All rights reserved.</p>
+    <p class="copyright">Copyright &copy; ykyki. 2024. All rights reserved.</p>
 </div>
 
 <style>
     .footer {
         display: flex;
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        justify-content: space-between;
         margin-bottom: var(--size-3);
+    }
+    @media (width < 768px) {
+        .footer {
+            display: flex;
+            flex-direction: column;
+        }
     }
 
     .icons {
@@ -30,5 +36,10 @@
         display: inline;
         font-size: var(--font-size-5);
         color: var(--text-1);
+    }
+
+    .copyright {
+        color: var(--text-2);
+        font-size: var(--font-size-0);
     }
 </style>
