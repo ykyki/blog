@@ -27,6 +27,11 @@ const postForms: PostForm[] = [
         description:
             '設計作業中にクラス図を描くときに意識していることをまとめた',
     },
+    {
+        title: 'GitHub Actionsを整理するためのパターンを考える',
+        postDate: '2024-02-28',
+        url: 'https://zenn.dev/ykyki/articles/github-actions-pattern',
+    },
 ];
 
 const POSTS: Post[] = postForms.map((postForm) => {
