@@ -13,6 +13,9 @@ const config = {
                 exclude: ['<all>'],
             },
         }),
+        paths: {
+            relative: false,
+        },
     },
 };
 
