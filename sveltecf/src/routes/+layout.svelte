@@ -1,4 +1,5 @@
 <script lang="ts">
+    import 'app.pcss';
     import Base from '$lib/component/layout/Base.svelte';
     import BlogHeader from '$lib/component/BlogHeader.svelte';
     import BlogFooter from '$lib/component/BlogFooter.svelte';

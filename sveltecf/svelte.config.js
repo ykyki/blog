@@ -16,6 +16,9 @@ const config = {
         paths: {
             relative: false,
         },
+        alias: {
+            'app.pcss': 'src/app.pcss',
+        },
     },
 };
 
