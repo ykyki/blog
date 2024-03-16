@@ -63,6 +63,9 @@ importers:
       open-props:
         specifier: ^1.6.19
         version: 1.6.19
+      postcss:
+        specifier: ^8.4.32
+        version: 8.4.35
       postcss-jit-props:
         specifier: ^1.0.14
         version: 1.0.14(postcss@8.4.35)
