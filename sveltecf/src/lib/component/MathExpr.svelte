@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
     import katex, { type KatexOptions } from 'katex';
     import 'katex/dist/katex.min.css';
 
@@ -18,23 +17,21 @@
         },
         globalGroup: false,
     };
-
-    let mathRef: HTMLSpanElement;
-    onMount(() => {
-        katex.render(expr, mathRef, {
-            ...options,
-            displayMode: mode === 'display',
-        });
-    });
 </script>
 
 {#if mode === 'inline'}
     <span>
-        <span bind:this={mathRef} />
+        <!-- eslint-disable-line svelte/no-at-html-tags -->{@html katex.renderToString(
+            expr,
+            options,
+        )}
     </span>
 {:else if mode === 'display'}
     <div>
-        <span bind:this={mathRef} />
+        <!-- eslint-disable-line svelte/no-at-html-tags -->{@html katex.renderToString(
+            expr,
+            options,
+        )}
     </div>
 {/if}
 
