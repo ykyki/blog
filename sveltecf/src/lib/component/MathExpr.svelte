@@ -21,17 +21,17 @@
 
 {#if mode === 'inline'}
     <span>
-        {@html katex.renderToString(
+        <!-- eslint-disable-line svelte/no-at-html-tags -->{@html katex.renderToString(
             expr,
             options,
-        )}<!-- eslint-disable-line svelte/no-at-html-tags -->
+        )}
     </span>
 {:else if mode === 'display'}
     <div>
-        {@html katex.renderToString(
+        <!-- eslint-disable-line svelte/no-at-html-tags -->{@html katex.renderToString(
             expr,
             options,
-        )}<!-- eslint-disable-line svelte/no-at-html-tags -->
+        )}
     </div>
 {/if}
 
