@@ -47,13 +47,16 @@
     }
 
     :global(h1) {
-        font-size: var(--font-size-7);
+        font-size: var(--font-size-6);
+        min-width: 100%;
     }
     :global(h2) {
-        font-size: var(--font-size-6);
+        font-size: var(--font-size-5);
+        min-width: 100%;
     }
     :global(h3) {
-        font-size: var(--font-size-5);
+        font-size: var(--font-size-4);
+        min-width: 100%;
     }
 
     @media (width < 768px) {
