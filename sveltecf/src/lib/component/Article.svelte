@@ -23,17 +23,19 @@
             tags: article.frontmatter.tags,
         }} />
 
-    <dt>Table of Contents</dt>
-    <dd>
-        <ul>
-            {#each article.headings as heading}
-                <li>
-                    {'#'.repeat(heading.depth)}{' '}
-                    <InlineComponent component={heading} />
-                </li>
-            {/each}
-        </ul>
-    </dd>
+    <div class="toc">
+        <dt>Table of Contents</dt>
+        <dd>
+            <ul>
+                {#each article.headings as heading}
+                    <li>
+                        {'#'.repeat(heading.depth)}{' '}
+                        <InlineComponent component={heading} />
+                    </li>
+                {/each}
+            </ul>
+        </dd>
+    </div>
 
     <article>
         {#each article.root.children as component}
@@ -47,6 +49,10 @@
         display: flex;
         flex-direction: column;
         gap: var(--size-2);
+
+        & > h1 {
+            padding-bottom: var(--size-3);
+        }
 
         & article {
             padding-top: var(--size-5);
@@ -65,6 +71,23 @@
     h1 > a {
         color: var(--yellow-4);
         text-decoration: underline;
+    }
+
+    div.toc ul {
+        padding: 0;
+    }
+    div.toc li {
+        padding: 0;
+        padding-left: 1rem;
+        list-style: none;
+        &:not(:last-child) {
+            padding-bottom: 0.2rem;
+        }
+    }
+    @media (width < 768px) {
+        div.toc {
+            display: none;
+        }
     }
 
     article {
