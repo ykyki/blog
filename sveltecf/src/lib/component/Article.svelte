@@ -7,7 +7,7 @@
 
     export let article: Schema.Article;
     export let articlePath: string | undefined = undefined;
-    const dateTimeFormat = 'yyyy-MM-dd HH:mm:ss';
+    const dateTimeFormat = 'yyyy-MM-dd';
 </script>
 
 <div class="base">

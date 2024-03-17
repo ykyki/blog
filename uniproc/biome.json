@@ -1,4 +1,35 @@
 {
     "$schema": "../node_modules/@biomejs/biome/configuration_schema.json",
-    "extends": ["../biome.json"]
+    "extends": ["../biome.json"],
+    "linter": {
+        "rules": {
+            "nursery": {
+                "noUndeclaredDependencies": "warn"
+            },
+            "style": {
+                "useImportType": "warn"
+            },
+            "suspicious": {
+                "useAwait": "warn"
+            }
+        }
+    },
+    "overrides": [
+        {
+            "include": ["src/main.ts"],
+            "linter": {
+                "rules": {
+                    "complexity": {
+                        "noForEach": "off"
+                    },
+                    "suspicious": {
+                        "noConsoleLog": "off"
+                    },
+                    "correctness": {
+                        "noUnusedVariables": "warn"
+                    }
+                }
+            }
+        }
+    ]
 }

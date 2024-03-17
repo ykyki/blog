@@ -38,20 +38,5 @@
             "arrowParentheses": "always",
             "quoteProperties": "asNeeded"
         }
-    },
-    "overrides": [
-        {
-            "include": ["src/main.ts"],
-            "linter": {
-                "rules": {
-                    "complexity": {
-                        "noForEach": "off"
-                    },
-                    "suspicious": {
-                        "noConsoleLog": "off"
-                    }
-                }
-            }
-        }
-    ]
+    }
 }

@@ -2,6 +2,16 @@
     "$schema": "../node_modules/@biomejs/biome/configuration_schema.json",
     "extends": ["../biome.json"],
     "files": {
-        "ignore": [".svelte-kit", "./src/app.d.ts"]
+        "ignore": [".svelte-kit", "./src/app.d.ts", "*.svelte"]
+    },
+    "linter": {
+        "rules": {
+            "nursery": {
+                "noUndeclaredDependencies": "off"
+            },
+            "style": {
+                "useFilenamingConvention": "off"
+            }
+        }
     }
 }
