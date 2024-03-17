@@ -27,6 +27,7 @@
         & > div:last-child {
             flex-grow: 1;
         }
+        color: var(--text-2);
 
         & > div > dt {
             min-width: 100%;
@@ -47,10 +48,6 @@
             padding: 0;
             display: inline;
 
-            /* &:not(:first-child)::before {
-                padding-left: 0.5rem;
-                content: ', ';
-            } */
             &:not(:last-child)::after {
                 padding-right: 0.5rem;
                 content: ',';

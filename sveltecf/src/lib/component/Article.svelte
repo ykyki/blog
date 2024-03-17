@@ -73,20 +73,23 @@
         text-decoration: underline;
     }
 
-    div.toc ul {
-        padding: 0;
-    }
-    div.toc li {
-        padding: 0;
-        padding-left: 1rem;
-        list-style: none;
-        &:not(:last-child) {
-            padding-bottom: 0.2rem;
-        }
-    }
-    @media (width < 768px) {
-        div.toc {
+    div.toc {
+        color: var(--text-2);
+        @media (width < 768px) {
             display: none;
+        }
+
+        & ul {
+            padding: 0;
+        }
+
+        & li {
+            padding: 0;
+            padding-left: 1rem;
+            list-style: none;
+            &:not(:last-child) {
+                padding-bottom: 0.2rem;
+            }
         }
     }
 
@@ -94,6 +97,6 @@
         font-family: var(--font-sans);
     }
     article > :global(*) {
-        line-height: var(--font-lineheight-5);
+        line-height: var(--font-lineheight-4);
     }
 </style>
