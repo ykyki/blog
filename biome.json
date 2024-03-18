@@ -1,7 +1,7 @@
 {
     "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
     "files": {
-        "ignore": ["node_modules", "dist", "build"]
+        "ignore": ["node_modules", "dist", "build", "*.svelte"]
     },
     "organizeImports": {
         "enabled": true
