@@ -5,7 +5,7 @@
 
 <div class="footer">
     <div class="icons">
-        <a href={base}><Icon icon="ion:home-sharp" /></a>
+        <a href="{base}/"><Icon icon="ion:home-sharp" /></a>
         <a href="https://github.com/ykyki"><Icon icon="mdi:github" /></a>
         <a href="https://github.com/ykyki/blog"
             ><Icon icon="mdi:file-code" /></a>
