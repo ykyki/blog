@@ -33,7 +33,7 @@
         "formatter": {
             "quoteStyle": "single",
             "jsxQuoteStyle": "double",
-            "trailingComma": "all",
+            "trailingCommas": "all",
             "semicolons": "always",
             "arrowParentheses": "always",
             "quoteProperties": "asNeeded"
