@@ -1,7 +1,14 @@
 {
     "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
     "files": {
-        "ignore": ["node_modules", "dist", "build", "*.svelte"]
+        "ignore": [
+            "**/node_modules/**",
+            "**/dist/**",
+            "**/build/**",
+            "**/*.svelte",
+            "sveltecf/.svelte-kit/**",
+            "sveltecf/src/app.d.ts"
+        ]
     },
     "organizeImports": {
         "enabled": true
@@ -38,5 +45,53 @@
             "arrowParentheses": "always",
             "quoteProperties": "asNeeded"
         }
-    }
+    },
+    "overrides": [
+        {
+            "include": ["uniproc/**"],
+            "linter": {
+                "rules": {
+                    "correctness": {
+                        "noUndeclaredDependencies": "warn"
+                    },
+                    "style": {
+                        "useImportType": "warn"
+                    },
+                    "suspicious": {
+                        "useAwait": "warn"
+                    }
+                }
+            }
+        },
+        {
+            "include": ["uniproc/src/main.ts"],
+            "linter": {
+                "rules": {
+                    "complexity": {
+                        "noForEach": "off"
+                    },
+                    "suspicious": {
+                        "noConsoleLog": "off"
+                    },
+                    "correctness": {
+                        "noNodejsModules": "off",
+                        "noUnusedVariables": "warn"
+                    }
+                }
+            }
+        },
+        {
+            "include": ["sveltecf/**"],
+            "linter": {
+                "rules": {
+                    "correctness": {
+                        "noUndeclaredDependencies": "off"
+                    },
+                    "style": {
+                        "useFilenamingConvention": "off"
+                    }
+                }
+            }
+        }
+    ]
 }

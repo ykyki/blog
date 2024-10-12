@@ -7,8 +7,6 @@
         "main": "bun run ./src/main.ts",
         "build": "pnpm run -F uniproc --parallel \"/build:.+/\"",
         "build:dist": "tsc --project ./tsconfig.build.json && tsc-alias -p ./tsconfig.build.json && bun run ./build.js",
-        "lint": "pnpm run lint:biome",
-        "lint:biome": "biome lint .",
         "clean": "pnpm run -F uniproc --parallel \"/clean:.+/\"",
         "clean:dist": "rm -rf ./dist",
         "test": "pnpm run -F uniproc --parallel \"/test:.+/\"",
