@@ -3,7 +3,7 @@
     "extends": ["../biome.json"],
     "linter": {
         "rules": {
-            "nursery": {
+            "correctness": {
                 "noUndeclaredDependencies": "warn"
             },
             "style": {
