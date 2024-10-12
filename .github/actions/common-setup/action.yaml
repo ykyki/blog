@@ -10,7 +10,7 @@ inputs:
   PNPM_VERSION:
     description: ''
     required: false
-    default: '8'
+    default: '9'
   BUN_VERSION:
     description: ''
     required: false
