@@ -8,13 +8,13 @@
             <slot name="header" />
         </header>
         <div>
-            <div class="line" />
+            <div class="line"></div>
         </div>
         <main>
             <slot name="main" />
         </main>
         <div>
-            <div class="line" />
+            <div class="line"></div>
         </div>
         <footer>
             <slot name="footer" />

@@ -10,39 +10,43 @@
         <section>
             <h3>Link</h3>
             <table>
-                <tr>
-                    <th>GitHub</th>
-                    <td
-                        ><a href="https://github.com/ykyki"
-                            ><Icon icon="mdi:github" /></a>
-                    </td>
-                    <td>
-                        <a href="https://github.com/ykyki"
-                            >https://github.com/ykyki</a
-                        ></td>
-                </tr>
-                <tr>
-                    <th>Zenn</th>
-                    <td
-                        ><a href="https://zenn.dev/ykyki"
-                            ><Icon icon="simple-icons:zenn" /></a>
-                    </td>
-                    <td>
-                        <a href="https://zenn.dev/ykyki"
-                            >https://zenn.dev/ykyki</a
-                        ></td>
-                </tr>
-                <tr>
-                    <th>Bluesky</th>
-                    <td
-                        ><a href="https://bsky.app/profile/ykyki.bsky.social"
-                            ><Icon icon="ri:bluesky-fill" /></a>
-                    </td>
-                    <td
-                        ><a href="https://bsky.app/profile/ykyki.bsky.social"
-                            >https://bsky.app/profile/ykyki.bsky.social</a
-                        ></td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <th>GitHub</th>
+                        <td
+                            ><a href="https://github.com/ykyki"
+                                ><Icon icon="mdi:github" /></a>
+                        </td>
+                        <td>
+                            <a href="https://github.com/ykyki"
+                                >https://github.com/ykyki</a
+                            ></td>
+                    </tr>
+                    <tr>
+                        <th>Zenn</th>
+                        <td
+                            ><a href="https://zenn.dev/ykyki"
+                                ><Icon icon="simple-icons:zenn" /></a>
+                        </td>
+                        <td>
+                            <a href="https://zenn.dev/ykyki"
+                                >https://zenn.dev/ykyki</a
+                            ></td>
+                    </tr>
+                    <tr>
+                        <th>Bluesky</th>
+                        <td
+                            ><a
+                                href="https://bsky.app/profile/ykyki.bsky.social"
+                                ><Icon icon="ri:bluesky-fill" /></a>
+                        </td>
+                        <td
+                            ><a
+                                href="https://bsky.app/profile/ykyki.bsky.social"
+                                >https://bsky.app/profile/ykyki.bsky.social</a
+                            ></td>
+                    </tr>
+                </tbody>
             </table>
         </section>
     </section>
