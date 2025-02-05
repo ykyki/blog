@@ -41,7 +41,7 @@
         "typescript": "^5.6.3",
         "uniproc": "workspace:*",
         "vite": "^5.4.12",
-        "vitest": "^2.1.5",
+        "vitest": "^2.1.9",
         "wrangler": "^3.87.0"
     },
     "type": "module",
