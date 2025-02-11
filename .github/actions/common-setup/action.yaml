@@ -6,11 +6,11 @@ inputs:
   NODE_VERSION:
     description: ''
     required: false
-    default: '20'
+    default: '23'
   PNPM_VERSION:
     description: ''
     required: false
-    default: '9'
+    default: '10'
   BUN_VERSION:
     description: ''
     required: false
