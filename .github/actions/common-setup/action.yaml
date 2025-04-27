@@ -14,7 +14,7 @@ inputs:
   BUN_VERSION:
     description: ''
     required: false
-    default: '1'
+    default: '1.2'
   REQUIRE_BUN:
     description: ''
     required: false
