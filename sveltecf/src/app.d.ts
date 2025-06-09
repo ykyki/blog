@@ -7,7 +7,7 @@ declare global {
                 COUNTER: DurableObjectNamespace;
             };
             context: {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                // eslint-disable-next-line no-undef
                 waitUntil(promise: Promise<any>): void;
             };
             caches: CacheStorage & { default: Cache };
