@@ -20,11 +20,11 @@
     "devDependencies": {
         "@types/js-yaml": "^4.0.9",
         "@types/mdast": "^4.0.4",
-        "@types/node": "^22.13.1",
-        "bun-types": "^1.2.2",
+        "@types/node": "^22.15.30",
+        "bun-types": "^1.2.15",
         "mdast-util-math": "^3.0.0",
-        "tsc-alias": "^1.8.10",
-        "typescript": "^5.7.3"
+        "tsc-alias": "^1.8.16",
+        "typescript": "^5.8.3"
     },
     "dependencies": {
         "js-yaml": "^4.1.0",
@@ -35,6 +35,6 @@
         "unified": "^11.0.5",
         "unist-util-is": "^6.0.0",
         "unist-util-visit": "^5.0.0",
-        "zod": "^3.24.1"
+        "zod": "^3.25.56"
     }
 }
