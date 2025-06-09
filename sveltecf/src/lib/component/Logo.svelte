@@ -8,7 +8,7 @@
 
 <style>
     .logo {
-        background: var(--gradient-19);
+        background: linear-gradient(135deg, var(--yellow-3), var(--orange-3));
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;

@@ -30,9 +30,11 @@
         }
 
         & a {
-            color: var(--color-on-primary);
+            color: var(--yellow-4);
             text-decoration: none;
+            font-weight: var(--font-weight-6);
             &:hover {
+                color: var(--yellow-3);
                 text-decoration: underline;
             }
         }
