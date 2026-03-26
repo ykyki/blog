@@ -27,5 +27,6 @@
             "sharp",
             "workerd"
         ]
-    }
+    },
+    "packageMangaer": "pnpm@10.3.0"
 }
