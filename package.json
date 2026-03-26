@@ -11,12 +11,12 @@
         "uniproc": "pnpm -F uniproc"
     },
     "devDependencies": {
-        "@biomejs/biome": "1.9.4",
-        "@typescript-eslint/eslint-plugin": "^8.33.1",
-        "@typescript-eslint/parser": "^8.33.1",
-        "eslint": "^9.28.0",
-        "eslint-config-prettier": "^10.1.5",
-        "prettier": "^3.5.3"
+        "@biomejs/biome": "2.4.9",
+        "@typescript-eslint/eslint-plugin": "^8.57.2",
+        "@typescript-eslint/parser": "^8.57.2",
+        "eslint": "^10.1.0",
+        "eslint-config-prettier": "^10.1.8",
+        "prettier": "^3.8.1"
     },
     "pnpm": {
         "ignoredBuiltDependencies": [
