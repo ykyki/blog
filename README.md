@@ -1,3 +1,3 @@
 # blog
 
-https://blog.ykyki.net/
+This repository is archived.
